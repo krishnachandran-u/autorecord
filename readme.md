@@ -19,7 +19,7 @@ This is an open-source project. The authors provide this tool without any warran
 
 ```
 subject_name
-├── 1-cycle_name
+├── 1 (cycle)
 │   ├── 1-experiment_name
 │   │   ├── date.txt
 │   │   ├── aim.txt
@@ -34,7 +34,7 @@ subject_name
 │       ├── program.c
 │       ├── output.png
 │       └── result.txt
-└── 2-cycle_name
+└── 2 (cycle)
     ├── 1-experiment_name
     │   ├── date.txt
     │   ├── aim.txt
@@ -44,11 +44,11 @@ subject_name
     │   └── result.txt
 ```
  - Replace `subject-name` with the required subject name. For example, `Operating Systems Lab`.
- - Replace `2-cycle_name` with the required cycle name. For example, `1-Cycle 1`.
+ - Replace `2` with the required cycle name. For example, `1-Cycle 1`.
  - For multiple output images, create a folder `output` and add all images `1.png`, `2.png`, `3.png`... in the order in which they should be placed in the record.
  - Open `date.txt` and write the required date in it. For example, `1-1-2023`. It will be neglected if empty.
 
-### Single Experiment Report
+### Experiment Report
 
 ```
 1-experiment_name
@@ -63,7 +63,7 @@ subject_name
  - For multiple output images, create a folder `output` and add all images `1.png`, `2.png`, `3.png`... in the order in which they should be placed in the record.
  - Open `date.txt` and write the required date in it. For example, `1-1-2023`. It will be neglected if empty.
 
-### Output
+### Experiment Output
 
 ```
 1-experiment_name
