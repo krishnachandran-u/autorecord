@@ -28,7 +28,7 @@ subject_name
 │   │   ├── output.png
 │   │   └── result.txt
 │   └── 2-another_experiment
-│   │   ├── date.txt
+│       ├── date.txt
 │       ├── aim.txt
 │       ├── algorithm.txt
 │       ├── program.c
@@ -36,7 +36,7 @@ subject_name
 │       └── result.txt
 └── 2-cycle_name
     ├── 1-experiment_name
-│   │   ├── date.txt
+    │   ├── date.txt
     │   ├── aim.txt
     │   ├── algorithm.txt
     │   ├── program.c
