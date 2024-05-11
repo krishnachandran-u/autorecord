@@ -55,9 +55,20 @@ if __name__ == "__main__":
                 expName = input("name of experiment " + str(j + 1) + ": ")
                 os.mkdir(f"./src/{answers['subject']}/{str(i + 1)}/{str(j + 1)} {expName}")
 
-                for file in completeRecordFiles:
-                    with open(f"./src/{answers['subject']}/{str(i + 1)}/{str(j + 1)} {expName}/{file}.txt", "w") as f:
-                        pass
+                problems = input("number of problems in experiment " + str(j + 1) + ": ")
+
+                if(int(problems) == 0):
+                    for file in completeRecordFiles:
+                        with open(f"./src/{answers['subject']}/{str(i + 1)}/{str(j + 1)} {expName}/{file}.txt", "w") as f:
+                            pass
+                else: 
+                    for k in range(int(problems)):
+                        problemName = input("name of problem " + str(k + 1) + ": ")
+                        os.mkdir(f"./src/{answers['subject']}/{str(i + 1)}/{str(j + 1)} {expName}/{str(k + 1)} {problemName}")
+
+                        for file in completeRecordFiles:
+                            with open(f"./src/{answers['subject']}/{str(i + 1)}/{str(j + 1)} {expName}/{str(k + 1)} {problemName}/{file}.txt", "w") as f:
+                                pass
                 
                 
 

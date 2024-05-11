@@ -21,13 +21,21 @@ This is an open-source project. The authors provide this tool without any warran
 subject-name
 ├── 1
 │   ├── 1 experiment-name
-│   │   ├── date.txt
-│   │   ├── aim.txt
-│   │   ├── algorithm.txt
-│   │   ├── program.c
-│   │   ├── output.png
-│   │   └── result.txt
-│   └── 2 another-experiment
+│   │   ├── 1 problem-name
+│   │   │   ├── date.txt
+│   │   │   ├── aim.txt
+│   │   │   ├── algorithm.txt
+│   │   │   ├── program.c
+│   │   │   ├── output.png
+│   │   │   └── result.txt
+│   │   └── 2 another-problem-name
+│   │       ├── date.txt
+│   │       ├── aim.txt
+│   │       ├── algorithm.txt
+│   │       ├── program.c
+│   │       ├── output.png
+│   │       └── result.txt
+│   └── 2 another-experiment-name
 │       ├── date.txt
 │       ├── aim.txt
 │       ├── algorithm.txt
