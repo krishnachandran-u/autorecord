@@ -15,7 +15,7 @@ This is an open-source project. The authors provide this tool without any warran
 
 ## Directory Structure
 
-### Complete Record
+### Complete Record/Cycle Report
 
 ```
 subject-name

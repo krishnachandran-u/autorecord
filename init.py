@@ -11,7 +11,7 @@ questions = [
         "experiment report", 
         "experiment output"
     ]),
-    inquirer.Text("subject", message = "input the subject name"),
+    # inquirer.Text("subject", message = "input the subject name"),
     inquirer.List("fontFamily", message = "choose the font family", choices = [
         "default",
         "times",
@@ -44,6 +44,7 @@ if __name__ == "__main__":
     pprint(answers)
 
     if answers["type"] == "complete record": 
+        subject = input("input the subject name: ")
         os.mkdir(f"./src/{answers['subject']}") 
         cycles = input("number of cycles: ")
 
@@ -69,6 +70,45 @@ if __name__ == "__main__":
                         for file in completeRecordFiles:
                             with open(f"./src/{answers['subject']}/{str(i + 1)}/{str(j + 1)} {expName}/{str(k + 1)} {problemName}/{file}.txt", "w") as f:
                                 pass
+    elif answers["type"] == "experiment report":
+        expNo = input("serial number of experiment: ")
+        expName = input("name of experiment: ")
+        os.mkdir(f"./src/{answers['subject']}/{expNo} {expName}")
+
+        problems = input("number of problems in experiment: ")
+
+        if(int(problems) == 0):
+            for file in completeRecordFiles:
+                with open(f"./src/{answers['subject']}/{expNo} {expName}/{file}.txt", "w") as f:
+                    pass
+        else:
+            for i in range(int(problems)):
+                problemName = input("name of problem " + str(i + 1) + ": ")
+                os.mkdir(f"./src/{answers['subject']}/{expNo} {expName}/{str(i + 1)} {problemName}")
+
+                for file in completeRecordFiles:
+                    with open(f"./src/{answers['subject']}/{expNo} {expName}/{str(i + 1)} {problemName}/{file}.txt", "w") as f:
+                        pass
+
+    elif answers["type"] == "experiment output":
+        expNo = input("serial number of experiment: ")
+        expName = input("name of experiment: ")
+        os.mkdir(f"./src/{answers['subject']}/{expNo} {expName}")
+
+        problems = input("number of problems in experiment: ")
+
+        if(int(problems) == 0):
+            with open(f"./src/{answers['subject']}/{expNo} {expName}/date.txt", "w") as f:
+                pass
+        else:
+            for i in range(int(problems)):
+                problemName = input("name of problem " + str(i + 1) + ": ")
+                os.mkdir(f"./src/{answers['subject']}/{expNo} {expName}/{str(i + 1)} {problemName}")
+
+                with open(f"./src/{answers['subject']}/{expNo} {expName}/{str(i + 1)} {problemName}/date.txt", "w") as f:
+                    pass
+
+
                 
                 
 
