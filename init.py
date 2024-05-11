@@ -45,8 +45,12 @@ if __name__ == "__main__":
     pprint(answers)
 
     if answers["type"] == "complete record": 
-        subject = input("input the subject name: ")
+        subject = input("subject name: ")
         os.mkdir(f"./src/{answers['subject']}") 
+
+        date = input("submission date (dd-mm-yyyy): ")
+        answers["date"] = date
+
         with open (f"./src/{answers['subject']}/options.json", "w") as json_file:
             json.dump(answers, json_file)
 
