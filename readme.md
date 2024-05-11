@@ -19,7 +19,7 @@ This is an open-source project. The authors provide this tool without any warran
 
 ```
 subject-name
-├── 1
+├── 1 (cycle)
 │   ├── 1 experiment-name
 │   │   ├── 1 problem-name
 │   │   │   ├── date.txt
@@ -42,7 +42,7 @@ subject-name
 │       ├── program.c
 │       ├── output.png
 │       └── result.txt
-└── 2
+└── 2 (cycle)
     ├── 1 experiment-name
     │   ├── date.txt
     │   ├── aim.txt
@@ -66,6 +66,24 @@ subject-name
 ├── program.c
 ├── output.png
 └── result.txt
+
+or
+
+1 experiment-name
+├── 1 problem-name
+│   ├── date.txt
+│   ├── aim.txt
+│   ├── algorithm.txt
+│   ├── program.c
+│   ├── output.png
+│   └── result.txt
+└── 2 another-problem-name
+    ├── date.txt
+    ├── aim.txt
+    ├── algorithm.txt
+    ├── program.c
+    ├── output.png
+    └── result.txt
 ```
  - Replace `1` in `1-experiment-name` with the required experiment number. For example, `13-Binary Search Tree`.
  - For multiple output images, create a folder `output` and add all images `1.png`, `2.png`, `3.png`... in the order in which they should be placed in the record.
@@ -77,6 +95,16 @@ subject-name
 1-experiment-name
 ├── date.txt
 └── output.png
+
+or
+
+1-experiment-name
+├── 1-problem-name
+│   ├── date.txt
+│   └── output.png
+└── 2-another-problem-name
+    ├── date.txt
+    └── output.png
 ```
  - Replace `1` in `1-experiment-name` with the required experiment number. For example, `15-Merge Sort`.
  - For multiple output images, create a folder `output` and add all images `1.png`, `2.png`, `3.png`... in the order in which they should be placed in the record.
