@@ -1,4 +1,5 @@
 import inquirer
+import json
 import atexit
 import os
 from inquirer.themes import GreenPassion
@@ -46,6 +47,9 @@ if __name__ == "__main__":
     if answers["type"] == "complete record": 
         subject = input("input the subject name: ")
         os.mkdir(f"./src/{answers['subject']}") 
+        with open (f"./src/{answers['subject']}/options.json", "w") as json_file:
+            json.dump(answers, json_file)
+
         cycles = input("number of cycles: ")
 
         for i in range(int(cycles)):
@@ -73,7 +77,10 @@ if __name__ == "__main__":
     elif answers["type"] == "experiment report":
         expNo = input("serial number of experiment: ")
         expName = input("name of experiment: ")
-        os.mkdir(f"./src/{answers['subject']}/{expNo} {expName}")
+        os.mkdir(f"./src/{expNo} {expName}")
+
+        with open (f"./src/{expNo} {expName}/options.json", "w") as json_file:
+            json.dump(answers, json_file)
 
         problems = input("number of problems in experiment: ")
 
@@ -84,28 +91,31 @@ if __name__ == "__main__":
         else:
             for i in range(int(problems)):
                 problemName = input("name of problem " + str(i + 1) + ": ")
-                os.mkdir(f"./src/{answers['subject']}/{expNo} {expName}/{str(i + 1)} {problemName}")
+                os.mkdir(f"./src/{expNo} {expName}/{str(i + 1)} {problemName}")
 
                 for file in completeRecordFiles:
-                    with open(f"./src/{answers['subject']}/{expNo} {expName}/{str(i + 1)} {problemName}/{file}.txt", "w") as f:
+                    with open(f"./src/{expNo} {expName}/{str(i + 1)} {problemName}/{file}.txt", "w") as f:
                         pass
 
     elif answers["type"] == "experiment output":
         expNo = input("serial number of experiment: ")
         expName = input("name of experiment: ")
-        os.mkdir(f"./src/{answers['subject']}/{expNo} {expName}")
+        os.mkdir(f"./src/{expNo} {expName}")
+
+        with open (f"./src/{expNo} {expName}/options.json", "w") as json_file:
+            json.dump(answers, json_file)
 
         problems = input("number of problems in experiment: ")
 
         if(int(problems) == 0):
-            with open(f"./src/{answers['subject']}/{expNo} {expName}/date.txt", "w") as f:
+            with open(f"./src/{expNo} {expName}/date.txt", "w") as f:
                 pass
         else:
             for i in range(int(problems)):
                 problemName = input("name of problem " + str(i + 1) + ": ")
-                os.mkdir(f"./src/{answers['subject']}/{expNo} {expName}/{str(i + 1)} {problemName}")
+                os.mkdir(f"./src/{expNo} {expName}/{str(i + 1)} {problemName}")
 
-                with open(f"./src/{answers['subject']}/{expNo} {expName}/{str(i + 1)} {problemName}/date.txt", "w") as f:
+                with open(f"./src/{expNo} {expName}/{str(i + 1)} {problemName}/date.txt", "w") as f:
                     pass
 
 
