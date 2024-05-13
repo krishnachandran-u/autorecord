@@ -23,8 +23,8 @@ export default function Home() {
             <button className = "bg-black border-2 border-white text-white p-[12px] rounded-lg hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto">
               credits
             </button>
-            <button className = "bg-black border-2 border-white text-white p-[12px] rounded-lg hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto flex flex-row justify-center items-center gap-[12px]">
-              <FaGithub color="#ffffff" size="24px" />
+            <button className = "bg-black border-2 border-white text-white p-[12px] rounded-lg hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto flex flex-row justify-center items-center gap-[12px] group">
+              <FaGithub className = "text-white group-hover:text-black transition-all duration-300" size="24px" />
               <div>github</div>
             </button>
           </div>
@@ -40,12 +40,12 @@ export default function Home() {
               <Switch />
             </div>
             <div className = "flex flex-row items-center gap-[32px] justify-between">
-              <div className = "whitespace-nowrap">use monospace font for code stubs</div>
+              <div className = "md:whitespace-nowrap">use monospace font for code stubs</div>
               <Switch />
             </div>
             <div className = "flex flex-row justify-between items-center gap-[32px]">
-              <button className = "flex-1 bg-white p-[12px] border-white border-2 text-black rounded-lg hover:scale-110 transition-all duration-300">save</button>
-              <button className = "flex-1 bg-white p-[12px] border-white border-2 text-black rounded-lg hover:scale-110 transition-all duration-300">get</button>
+              <button className = "flex-1 bg-white p-[12px] border-white border-2 text-black rounded-lg hover:scale-110 hover:bg-slate-600 hover:text-white transition-all duration-300">save</button>
+              <button className = "flex-1 bg-white p-[12px] border-white border-2 text-black rounded-lg hover:scale-110 hover:bg-slate-600 hover:text-white transition-all duration-300">get</button>
             </div>
           </div> 
           <div className = "border-slate-600 border-[3px] w-full rounded-xl min-h-[400px] flex justify-center items-center">
