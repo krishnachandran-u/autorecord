@@ -3,6 +3,7 @@ import { Switch } from "@/components/ui/switch";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
+import Canvas from "@/components/canvas";
 
 export default function Home() {
   return (
@@ -51,8 +52,8 @@ export default function Home() {
                 <button className = "flex-1 bg-white p-[12px] border-white border-2 text-black rounded-lg hover:scale-110 hover:bg-slate-600 hover:text-white transition-all duration-300">get</button>
             </div>
           </div> 
-          <div className = "border-slate-600 border-[3px] w-full rounded-xl min-h-[400px] flex justify-center items-center">
-            open a project to continue 
+          <div className = "border-slate-600 border-[3px] w-full rounded-xl min-h-[400px] flex justify-center items-center overflow-x-scroll">
+            <Canvas />
           </div>
         </div>
       </div>
