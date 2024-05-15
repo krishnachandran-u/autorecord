@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sora } from "next/font/google";
 import "./globals.css";
+import { ProjectProvider } from "@/contexts/projectContext";
 
 const sora = Sora({ subsets: ["latin"] });
 
@@ -14,9 +15,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body className={sora.className}>{children}</body>
+      <ProjectProvider>
+        <body className={sora.className}>{children}</body>
+      </ProjectProvider>
     </html>
   );
 }
