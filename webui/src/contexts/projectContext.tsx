@@ -16,7 +16,7 @@ export const ProjectProvider = ({children}:{children: ReactNode}) => {
     //{name}:{name: string}
     const loadRecord = () => { 
         setRecord({
-            "11": "Experiment Name",
+            "1100": "Experiment Name",
             "1101": "Implement a menu-driven C program for performing various operations on a linked list, including display, insertion at the beginning, end, and a specified position, as well as deletion from the beginning, end, and a specified position.",
             "1102":
                 `

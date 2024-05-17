@@ -8,12 +8,9 @@ const Cycle = (
         <div className = "flex flex-col gap-[2px]">
             <div>cycle {id}</div>
             <div className = "pl-[32px]">
-                {childCount != 0 ? 
-                    null
-                    : 
-                    <FiPlus color = "red" className = "hover:cursor-pointer" /> 
-                }
+                <FiPlus color = "red" className = "hover:cursor-pointer" /> 
             </div>
+            <FiPlus color = "red" className = "hover:cursor-pointer" /> 
         </div>
     )
 }

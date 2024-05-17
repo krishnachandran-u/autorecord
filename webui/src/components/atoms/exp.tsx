@@ -5,7 +5,7 @@ const Exp = (
     {id: string, hasChildren: boolean}
 ) => {
     return (
-        <div className="flex flex-col gap-[2px]">
+        <div className={`flex flex-col gap-[2px] pl-[32px]`}>
             <div>experiment {id}</div>
             <div className="pl-[32px]">
                 {hasChildren ? 
