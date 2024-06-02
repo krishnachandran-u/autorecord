@@ -2,6 +2,7 @@ import sample1 from "../../public/sample1.png"
 import sample2 from "../../public/sample2.png"
 
 export const dummyProjectData = {
+    "code": "binary-search",
     "name": "Binary Search",
     "cycles" : [
         {
