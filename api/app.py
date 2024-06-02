@@ -1,12 +1,13 @@
 from flask import Flask, request
 import os
+from shutil import rmtree
 import json
 
 app = Flask(__name__)
-save_dir = './../appdata/'
+save_dir = './../.appdata/'
 app.config['SAVE_DIR'] = save_dir
 
-@app.route('/save', methods=['POST'])
+@app.route('/api/save', methods=['POST'])
 def save_json():
     try:
         data = request.get_json()
@@ -24,7 +25,7 @@ def save_json():
     except Exception as e:
         return str(e)
 
-@app.route('/load/<code>', methods=['GET'])
+@app.route('/api/load/<code>', methods=['GET'])
 def load_json(code):
     try:
         dir = f"{app.config['SAVE_DIR']}/{code}"
@@ -36,6 +37,30 @@ def load_json(code):
         return content
     except Exception as e:
         return str(e)
+
+@app.route('/api/delete/<code>', methods=['DELETE'])
+def delete_json(code):
+    try:
+        dir = f"{app.config['SAVE_DIR']}/{code}"
+
+        if os.path.exists(dir):
+            rmtree(dir)
+
+        return 'OK'
+    except Exception as e:
+        return str(e)
+
+@app.route('/api/list', methods=['GET'])
+def list_json():
+    try:
+        projects = os.listdir(app.config['SAVE_DIR'])
+        
+        return json.dumps(projects)
+    except Exception as e:
+        return str(e)
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    return 'OK'
 
 if __name__ == '__main__':
     app.run(debug=True)
