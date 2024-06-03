@@ -1,7 +1,7 @@
 import sample1 from "../../public/sample1.png"
 import sample2 from "../../public/sample2.png"
 
-export const dummyProjectData = {
+export const DummyProjectData = {
     "code": "binary-search",
     "name": "Binary Search",
     "cycles" : [
@@ -16,8 +16,8 @@ export const dummyProjectData = {
                         "algorithm": "Algorithm",
                         "program": "Program",
                         "output": [
-                            sample1,
-                            sample2
+                            "sample1",
+                            "sample2"
                         ],
                         "result": "Result"
                     },
@@ -29,8 +29,8 @@ export const dummyProjectData = {
                                 "algorithm": "Algorithm",
                                 "program": "Program",
                                 "output": [
-                                    sample1,
-                                    sample2
+                                    "sample1",
+                                    "sample2"
                                 ],
                                 "result": "Result"
                             },
@@ -42,8 +42,8 @@ export const dummyProjectData = {
                                 "algorithm": "Algorithm",
                                 "program": "Program",
                                 "output": [
-                                    sample1,
-                                    sample2
+                                    "sample1",
+                                    "sample2"
                                 ],
                                 "result": "Result"
                             },
@@ -59,8 +59,8 @@ export const dummyProjectData = {
                         "algorithm": "Algorithm",
                         "program": "Program",
                         "output": [
-                            sample1,
-                            sample2
+                            "sample1",
+                            "sample2"
                         ],
                         "result": "Result"
                     },
@@ -79,8 +79,8 @@ export const dummyProjectData = {
                         "algorithm": "Algorithm",
                         "program": "Program",
                         "output": [
-                            sample1,
-                            sample2
+                            "sample1",
+                            "sample2"
                         ],
                         "result": "Result"
                     },
@@ -94,8 +94,8 @@ export const dummyProjectData = {
                         "algorithm": "Algorithm",
                         "program": "Program",
                         "output": [
-                            sample1,
-                            sample2
+                            "sample1",
+                            "sample2"
                         ],
                         "result": "Result"
                     },
@@ -114,8 +114,8 @@ export const dummyProjectData = {
                         "algorithm": "Algorithm",
                         "program": "Program",
                         "output": [
-                            sample1,
-                            sample2
+                            "sample1",
+                            "sample2"
                         ],
                         "result": "Result"
                     },
@@ -127,8 +127,8 @@ export const dummyProjectData = {
                                 "algorithm": "Algorithm",
                                 "program": "Program",
                                 "output": [
-                                    sample1,
-                                    sample2
+                                    "sample1",
+                                    "sample2"
                                 ],
                                 "result": "Result"
                             },
@@ -140,8 +140,8 @@ export const dummyProjectData = {
                                 "algorithm": "Algorithm",
                                 "program": "Program",
                                 "output": [
-                                    sample1,
-                                    sample2
+                                    "sample1",
+                                    "sample2"
                                 ],
                                 "result": "Result"
                             },
@@ -157,8 +157,8 @@ export const dummyProjectData = {
                         "algorithm": "Algorithm",
                         "program": "Program",
                         "output": [
-                            sample1,
-                            sample2
+                            "sample1",
+                            "sample2"
                         ],
                         "result": "Result"
                     },

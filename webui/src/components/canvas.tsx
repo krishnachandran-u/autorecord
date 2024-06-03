@@ -8,7 +8,9 @@ const Canvas = () => {
 
     return (
         <div className = "size-full md:p-[24px] lg:p-[32px] p-[16px] text-[20px]">
-            <Cycle id="1" childCount= {0} />
+            {record.cycles.map((cycle, index) => (
+                <Cycle id = {index} key = {index} />
+            ))}
         </div>
     )
 }
