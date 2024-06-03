@@ -21,7 +21,16 @@ export const ProjectContext = createContext({
                     output: string[];
                     result: string;
                 };
-                problems: ({ /* ... */ } | { /* ... */ })[];
+                problems: {
+                    name: string;
+                    src: {
+                        aim: string;
+                        algorithm: string;
+                        program: string;
+                        output: string[];
+                        result: string;
+                    };
+                }[];
             }[];
         }[]
     },
@@ -42,7 +51,16 @@ export const ProjectProvider = ({children}:{children: ReactNode}) => {
                     output: string[];
                     result: string;
                 };
-                problems: ({ /* ... */ } | { /* ... */ })[];
+                problems: {
+                    name: string;
+                    src: {
+                        aim: string;
+                        algorithm: string;
+                        program: string;
+                        output: string[];
+                        result: string;
+                    };
+                }[];
             }[];
         }[]
     });
