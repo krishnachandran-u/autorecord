@@ -9,7 +9,7 @@ Saves a project with the provided data and images.
 
 ### Request Body
 
-- `code` (string): The code of the project.
+- `json_data` (string): The JSON data of the project.
 - `images` (array of files): The images associated with the project.
 
 ### Response
