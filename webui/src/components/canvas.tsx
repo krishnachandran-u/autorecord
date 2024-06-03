@@ -9,7 +9,11 @@ const Canvas = () => {
     return (
         <div className = "size-full md:p-[24px] lg:p-[32px] p-[16px] text-[20px]">
             {record.cycles.map((cycle, index) => (
-                <Cycle id = {index} key = {index} />
+                <Cycle  
+                props={{
+                    id: index
+                }}
+                key = {index} />
             ))}
         </div>
     )
