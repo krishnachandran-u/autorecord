@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, send_file
 import os
 from shutil import rmtree
 import json
@@ -8,9 +8,11 @@ save_dir = './../.appdata/'
 app.config['SAVE_DIR'] = save_dir
 
 @app.route('/api/save', methods=['POST'])
-def save_json():
+def save_project():
     try:
         data = request.get_json()
+        images = request.files.getlist('images')
+
         dir = f"{app.config['SAVE_DIR']}/{data['code']}"
         filename = data['code'] + '.json'
         content = json.dumps(data, indent=4)  # Prettify the JSON
@@ -21,20 +23,38 @@ def save_json():
         with open(os.path.join(dir, filename), 'w') as f:
             f.write(content)
 
+        for image in images:
+            image_path = os.path.join(dir, image.filename)
+            image.save(image_path)
+
         return 'OK'
     except Exception as e:
         return str(e)
 
 @app.route('/api/load/<code>', methods=['GET'])
-def load_json(code):
+def load_project(code):
     try:
         dir = f"{app.config['SAVE_DIR']}/{code}"
         filename = code + '.json'
+        json_path = os.path.join(dir, filename)
 
-        with open(os.path.join(dir, filename), 'r') as f:
-            content = f.read()
+        data = {}
 
-        return content
+        with open(json_path, 'r') as f:
+            data['content'] = json.load(f)
+
+        images = []
+        for image in os.listdir(dir):
+            image_path = os.path.join(dir, image)
+            if os.path.isfile(image_path) and image.lower.endswith(('.png', '.jpg', '.jpeg')):
+                images.append({
+                    "name" : image,
+                    "data" : send_file(image_path, send_as_attachment=True)
+                })
+
+        data['images'] = images
+        return data
+
     except Exception as e:
         return str(e)
 
