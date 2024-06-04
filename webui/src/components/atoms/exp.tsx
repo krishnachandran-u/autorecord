@@ -34,6 +34,20 @@ const Exp = (
                         />
                     ))
                 )}
+                {!record.cycles[cycleId].experiments[id].hasSubProblems && (
+                    Object.keys(record.cycles[cycleId].experiments[id].src).map((key, index) => (
+                    <textarea
+                        key = {index}
+                        className = "w-full border-2 border-gray-200 rounded-md overflow-y-hidden"
+                        onChange={(e) => {
+                            const textarea = e.target as HTMLTextAreaElement;
+                            textarea.style.height = "auto";
+                            textarea.style.height = `${textarea.scrollHeight}px`;
+                        }}
+                        placeholder = {key}
+                    />
+                    ))
+                )}
                 <FiPlus color = "red" className = "hover:cursor-pointer" /> 
             </div>
             {id === record.cycles[cycleId].experiments.length - 1 && (
