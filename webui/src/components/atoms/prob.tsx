@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion , AnimatePresence } from "framer-motion";
 import { FaAngleDown } from "react-icons/fa";
 import { useContext } from "react";
 import { ProjectContext } from "@/contexts/projectContext";
@@ -29,25 +30,34 @@ const Prob = (
                 <div>problem {id + 1}</div>
                 <FaAngleDown 
                     onClick={() => setShow(!show)}
-                    color = "red" className = "hover:cursor-pointer" 
+                    color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all duration-300`}
                 />
             </div>
-            <div 
-                className = {`flex flex-col gap-[2px] pl-[32px] ${show ? "block" : "hidden"}`}
-            >
-                {Object.keys(record.cycles[cycleId].experiments[expId].problems[id].src).map((key, index) => (
-                    <textarea
-                        key = {index}
-                        className = "w-full border-2 border-gray-200 rounded-md overflow-y-hidden"
-                        onChange={(e) => {
-                            const textarea = e.target as HTMLTextAreaElement;
-                            textarea.style.height = "auto";
-                            textarea.style.height = `${textarea.scrollHeight}px`;
-                        }}
-                        placeholder = {key}
-                    />
-                ))}
-            </div>
+            <AnimatePresence>
+                {show && (
+                    <motion.div 
+                        initial = {{height: 0, opacity: 0}}     
+                        animate = {{height: "auto", opacity: 1}}
+                        exit = {{height: 0, opacity: 0}}
+                        transition={{duration: 0.3}}
+                        className = {`flex flex-col gap-[2px] pl-[32px] ${show ? "block" : "hidden"}`}
+                        key = {0}
+                    >
+                        {Object.keys(record.cycles[cycleId].experiments[expId].problems[id].src).map((key, index) => (
+                            <textarea
+                                key = {index}
+                                className = "w-full border-2 border-gray-200 rounded-md overflow-y-hidden"
+                                onChange={(e) => {
+                                    const textarea = e.target as HTMLTextAreaElement;
+                                    textarea.style.height = "auto";
+                                    textarea.style.height = `${textarea.scrollHeight}px`;
+                                }}
+                                placeholder = {key}
+                            />
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
             {id === record.cycles[cycleId].experiments[expId].problems.length - 1 && (
                 <FiPlus color = "red" className = "hover:cursor-pointer" /> 
             )}

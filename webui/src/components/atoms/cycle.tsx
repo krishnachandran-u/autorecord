@@ -1,6 +1,8 @@
 import { FiPlus } from "react-icons/fi";
 import { useState } from "react";
 
+import { motion, AnimatePresence } from "framer-motion";
+
 import { useContext } from "react";
 import { ProjectContext } from "@/contexts/projectContext";
 
@@ -28,23 +30,32 @@ const Cycle = (
                 <div>cycle {id + 1}</div>
                 <FaAngleDown 
                     onClick={() => setShow(!show)}
-                    color = "red" className = "hover:cursor-pointer" 
+                    color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all duration-300`}
                 />
             </div>
-            <div
-                className = {`flex flex-col gap-[2px] pl-[32px] ${show ? "block" : "hidden"}`}
-            >
-                {record.cycles[id].experiments.map((experiment, index) => (
-                    <Exp 
-                        props={{
-                            cycleId: id,
-                            id: index
-                        }}
-                        key = {index}
-                    />
-    
-                ))}
-            </div>
+            <AnimatePresence>
+            {show && (
+                <motion.div
+                    initial = {{height: 0, opacity: 0}}  
+                    animate = {{height: "auto", opacity: 1}}
+                    exit = {{height: 0, opacity: 0}}
+                    transition={{duration: 0.3}}
+                    className = {`flex flex-col gap-[2px] pl-[32px]`}
+                    key = {0}
+                >
+                    {record.cycles[id].experiments.map((experiment, index) => (
+                        <Exp 
+                            props={{
+                                cycleId: id,
+                                id: index
+                            }}
+                            key = {index}
+                        />
+        
+                    ))}
+                </motion.div>
+            )}
+            </AnimatePresence>
                 {id === record.cycles.length - 1 && (
                     <FiPlus color = "red" className = "hover:cursor-pointer" /> 
                 )}
