@@ -1,8 +1,8 @@
 "use client"
 
-import { Urbanist } from "next/font/google";
+import { Ubuntu_Mono } from "next/font/google";
 
-const font = Urbanist({subsets: ["latin"]});
+const font = Ubuntu_Mono({subsets: ["latin"], weight: ["400", "700"]});
 
 import  { useState, useContext } from "react";
 import Cycle from "./atoms/cycle";

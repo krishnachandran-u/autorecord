@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { FaAngleDown } from "react-icons/fa";
 import { useContext } from "react";
 import { ProjectContext } from "@/contexts/projectContext";
 
@@ -19,13 +21,20 @@ const Prob = (
     const { cycleId, expId, id } = props;
     const { record, loadRecord } = useContext(ProjectContext);
 
+    const [show, setShow] = useState(false);
+
     return (
         <div className={`flex flex-col gap-[2px] pl-[32px]`}>
-            <div>problem {id + 1}</div>
-            <div className = "pl-[32px]">
-                <div
-                    className="flex flex-col gap-[2px]"
-                >
+            <div className="flex flex-row gap-[4px] items-center">
+                <div>problem {id + 1}</div>
+                <FaAngleDown 
+                    onClick={() => setShow(!show)}
+                    color = "red" className = "hover:cursor-pointer" 
+                />
+            </div>
+            <div 
+                className = {`flex flex-col gap-[2px] pl-[32px] ${show ? "block" : "hidden"}`}
+            >
                 {Object.keys(record.cycles[cycleId].experiments[expId].problems[id].src).map((key, index) => (
                     <textarea
                         key = {index}
@@ -38,7 +47,6 @@ const Prob = (
                         placeholder = {key}
                     />
                 ))}
-                </div>
             </div>
             {id === record.cycles[cycleId].experiments[expId].problems.length - 1 && (
                 <FiPlus color = "red" className = "hover:cursor-pointer" /> 

@@ -74,3 +74,15 @@
       @apply bg-background text-foreground;
     }
   }
+
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: gray;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: black;
+  }
