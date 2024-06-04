@@ -65,7 +65,7 @@ export default function Home() {
                 <button className = "flex-1 bg-white p-[12px] border-white border-2 text-black rounded-lg hover:scale-110 hover:bg-slate-600 hover:text-white transition-all duration-300">get</button>
             </div>
           </div> 
-          <div className = "border-slate-600 border-[3px] w-full rounded-xl min-h-[400px] flex justify-center items-center overflow-x-hidden">
+          <div className = {`border-slate-600 border-[3px] w-full rounded-xl min-h-[400px] flex justify-center overflow-x-hidden ${record === null? "items-center" : ""}`}>
             <Canvas />
           </div>
         </div>
