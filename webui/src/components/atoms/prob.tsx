@@ -22,7 +22,6 @@ const Prob = (
     const { cycleId, expId, id } = props;
     const { record, setRecord } = useContext(ProjectContext);
     const [show, setShow] = useState(false);
-    const [probName, setProbName] = useState(record.cycles[cycleId].experiments[expId].problems[id].name);
 
     return (
         <div className={`flex flex-col gap-[2px] pl-[32px]`}>
