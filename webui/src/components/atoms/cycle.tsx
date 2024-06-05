@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-import { useContext } from "react";
+import { useContext, ChangeEvent } from "react";
 import { ProjectContext } from "@/contexts/projectContext";
 
 import { FaAngleDown } from "react-icons/fa";
@@ -21,16 +21,25 @@ const Cycle = (
 
     const {id} = props;   
     const { record, loadRecord } = useContext(ProjectContext);
-
     const [show, setShow] = useState(false);
+    const [cycleName, setCycleName] = useState(record.cycles[id].name);
 
     return (
         <div className = "flex flex-col gap-[2px]">
             <div className = "flex flex-row gap-[4px] items-center">
-                <div>cycle {id + 1}</div>
+                <div>Cycle {id + 1}</div>
                 <FaAngleDown 
                     onClick={() => setShow(!show)}
                     color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all duration-300`}
+                />
+                <input 
+                    type = "text" 
+                    value = {cycleName}
+                    placeholder="Cycle Name Here"
+                    onChange={(e) => {
+                        setCycleName(e.target.value);
+                    }}
+                    className="border-2 border-gray-300 rounded-md p-1"
                 />
             </div>
             <AnimatePresence>

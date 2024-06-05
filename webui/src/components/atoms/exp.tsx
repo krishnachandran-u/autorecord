@@ -21,18 +21,27 @@ const Exp = (
 ) => {
     const { cycleId, id } = props;
     const { record, loadRecord } = useContext(ProjectContext);
-
     const [show, setShow] = useState(false);
+    const [expName, setExpName] = useState(record.cycles[cycleId].experiments[id].name);
 
     return (
         <div className={`flex flex-col gap-[2px] pl-[32px]`}>
             <div
                 className = "flex flex-row gap-[4px] items-center"
             >
-                <div>experiment {id + 1}</div>
+                <div>Experiment {id + 1}</div>
                 <FaAngleDown 
                     onClick={() => setShow(!show)}
                     color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all duration-300`}
+                />
+                <input 
+                    type = "text" 
+                    value = {expName}
+                    placeholder="Experiment Name Here"
+                    onChange={(e) => {
+                        setExpName(e.target.value);
+                    }}
+                    className="border-2 border-gray-300 rounded-md p-1"
                 />
             </div>
             <AnimatePresence>

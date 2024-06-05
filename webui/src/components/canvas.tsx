@@ -12,7 +12,7 @@ const Canvas = () => {
     const { record, loadRecord } = useContext(ProjectContext);
 
     return (
-        <div className = {`size-full md:p-[24px] lg:p-[32px] p-[16px] text-[16px] ${font.className}`}>
+        <div className = {`size-full md:p-[24px] lg:p-[32px] p-[16px] text-[16px] gap-[2px] flex flex-col ${font.className}`}>
             {record.cycles.map((cycle, index) => (
                 <Cycle  
                 props={{
