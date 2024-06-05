@@ -7,9 +7,9 @@ import { useEffect } from "react";
 
 import { DummyProjectData } from "../constants/projectData";
 
-export const ProjectContext = createContext({
+export const ProjectContext = createContext<{
     record: {
-        cycles: [] as {
+        cycles: {
             name: string;
             experiments: {
                 name: string;
@@ -32,9 +32,39 @@ export const ProjectContext = createContext({
                     };
                 }[];
             }[];
-        }[]
+        }[];
+    };
+    setRecord: React.Dispatch<React.SetStateAction<{
+        cycles: {
+            name: string;
+            experiments: {
+                name: string;
+                hasSubProblems: boolean;
+                src: {
+                    aim: string;
+                    algorithm: string;
+                    program: string;
+                    output: string[];
+                    result: string;
+                };
+                problems: {
+                    name: string;
+                    src: {
+                        aim: string;
+                        algorithm: string;
+                        program: string;
+                        output: string[];
+                        result: string;
+                    };
+                }[];
+            }[];
+        }[];
+    }>>; 
+}>({
+    record: {
+        cycles: [],
     },
-    loadRecord: () => {}
+    setRecord: () => {}
 });
 
 export const ProjectProvider = ({children}:{children: ReactNode}) => {
@@ -65,13 +95,9 @@ export const ProjectProvider = ({children}:{children: ReactNode}) => {
         }[]
     });
 
-    const loadRecord = () => {
-        setRecord(DummyProjectData);
-    }
-
     return (
         <ProjectContext.Provider 
-            value = {{record, loadRecord}}
+            value = {{record, setRecord}}
         >
             {children}
         </ProjectContext.Provider>

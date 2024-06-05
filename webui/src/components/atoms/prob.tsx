@@ -20,7 +20,7 @@ const Prob = (
 ) => {
 
     const { cycleId, expId, id } = props;
-    const { record, loadRecord } = useContext(ProjectContext);
+    const { record, setRecord } = useContext(ProjectContext);
     const [show, setShow] = useState(false);
     const [probName, setProbName] = useState(record.cycles[cycleId].experiments[expId].problems[id].name);
 
@@ -35,9 +35,13 @@ const Prob = (
                 <input 
                     type = "text" 
                     placeholder="Problem Name Here"
-                    value = {probName}
+                    value = {record.cycles[cycleId].experiments[expId].problems[id].name}
                     onChange={(e) => {
-                        setProbName(e.target.value);
+                        setRecord(prevRecord => {
+                            const updatedRecord = { ...prevRecord };
+                            updatedRecord.cycles[cycleId].experiments[expId].problems[id].name = e.target.value;
+                            return updatedRecord;
+                        });
                     }}
                     className="border-2 border-gray-300 rounded-md p-1"
                 />

@@ -1,5 +1,9 @@
+"use client"
+
 import { FiPlus } from "react-icons/fi";
-import { useState } from "react";
+import { FiMinus } from "react-icons/fi";
+import { use, useState } from "react";
+import { useEffect } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -20,9 +24,46 @@ const Cycle = (
 ) => {
 
     const {id} = props;   
-    const { record, loadRecord } = useContext(ProjectContext);
+    const {record, setRecord } = useContext(ProjectContext);
     const [show, setShow] = useState(false);
-    const [cycleName, setCycleName] = useState(record.cycles[id].name);
+
+    const addCycle = () => {
+        setRecord(prevRecord => {
+            const updatedCycles = [...prevRecord.cycles];
+            updatedCycles.push({
+                name: `Cycle ${updatedCycles.length + 1}`,
+                experiments: [
+                    {
+                        name: "Experiment 3",
+                        hasSubProblems: false,
+                        src: {
+                            aim: "Aim",
+                            algorithm: "Algorithm",
+                            program: "Program",
+                            output: ["sample1", "sample2"],
+                            result: "Result"
+                        },
+                        problems: []
+                    }
+                ]
+            });
+            return {
+                ...prevRecord,
+                cycles: updatedCycles
+            };
+        });
+    }
+
+    const removeCycle = () => {
+        setRecord(prevRecord => {
+            const updatedCycles = [...prevRecord.cycles];
+            updatedCycles.splice(id, 1);
+            return {
+                ...prevRecord,
+                cycles: updatedCycles
+            };
+        });
+    }
 
     return (
         <div className = "flex flex-col gap-[2px]">
@@ -34,13 +75,27 @@ const Cycle = (
                 />
                 <input 
                     type = "text" 
-                    value = {cycleName}
+                    value = {record.cycles[id].name}
                     placeholder="Cycle Name Here"
                     onChange={(e) => {
-                        setCycleName(e.target.value);
+                        setRecord(prevRecord => {
+                            const updatedCycles = [...prevRecord.cycles];
+                            updatedCycles[id].name = e.target.value;
+                            return {
+                                ...prevRecord,
+                                cycles: updatedCycles
+                            };
+                        });
                     }}
                     className="border-2 border-gray-300 rounded-md p-1"
                 />
+                {id === record.cycles.length - 1 && record.cycles.length !== 1 && (
+                     <FiMinus 
+                         color = "red" 
+                         className = "hover:cursor-pointer" 
+                         onClick = {() => removeCycle()} 
+                     /> 
+                 )}  
             </div>
             <AnimatePresence>
             {show && (
@@ -66,7 +121,11 @@ const Cycle = (
             )}
             </AnimatePresence>
                 {id === record.cycles.length - 1 && (
-                    <FiPlus color = "red" className = "hover:cursor-pointer" /> 
+                    <FiPlus 
+                        color = "red" 
+                        className = "hover:cursor-pointer" 
+                        onClick = {() => addCycle()} 
+                    /> 
                 )}
         </div>
     )

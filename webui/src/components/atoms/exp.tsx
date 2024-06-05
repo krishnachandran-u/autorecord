@@ -20,7 +20,7 @@ const Exp = (
     {props: ExpProps}
 ) => {
     const { cycleId, id } = props;
-    const { record, loadRecord } = useContext(ProjectContext);
+    const { record, setRecord } = useContext(ProjectContext);
     const [show, setShow] = useState(false);
     const [expName, setExpName] = useState(record.cycles[cycleId].experiments[id].name);
 
@@ -36,10 +36,15 @@ const Exp = (
                 />
                 <input 
                     type = "text" 
-                    value = {expName}
+                    value = {record.cycles[cycleId].experiments[id].name}
                     placeholder="Experiment Name Here"
                     onChange={(e) => {
                         setExpName(e.target.value);
+                        setRecord(prevRecord => {
+                            const updatedRecord = {...prevRecord};
+                            updatedRecord.cycles[cycleId].experiments[id].name = e.target.value;
+                            return updatedRecord;
+                        });
                     }}
                     className="border-2 border-gray-300 rounded-md p-1"
                 />

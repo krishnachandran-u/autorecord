@@ -9,15 +9,16 @@ import { useState, useContext, useEffect } from "react";
 import { ProjectContext } from "@/contexts/projectContext";
 import StatusBar from "@/components/atoms/statusbar";
 import Options from "@/components/atoms/options";
+import { DummyProjectData } from "@/constants/projectData";
 
 import { Sora } from "next/font/google";
 const sora = Sora({subsets: ["latin"], weight: ["600"]});
 
 export default function Home() {
-  const { record , loadRecord } = useContext(ProjectContext);
+  const { record , setRecord } = useContext(ProjectContext);
 
   useEffect(() => {
-    loadRecord();
+    setRecord(DummyProjectData);
   }, []);
 
   useEffect(() => {
