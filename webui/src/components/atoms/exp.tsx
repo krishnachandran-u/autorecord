@@ -3,6 +3,7 @@ import { motion , AnimatePresence } from "framer-motion";
 import { FiPlus } from "react-icons/fi";
 import { FaAngleDown } from "react-icons/fa";
 import { useState } from "react";
+import { FiMinus } from "react-icons/fi";
 
 import { useContext } from "react";
 
@@ -22,7 +23,44 @@ const Exp = (
     const { cycleId, id } = props;
     const { record, setRecord } = useContext(ProjectContext);
     const [show, setShow] = useState(false);
-    const [expName, setExpName] = useState(record.cycles[cycleId].experiments[id].name);
+
+    const addExp = () => {
+      setRecord(prevRecord => {
+        const updatedExps = [ ...prevRecord.cycles[cycleId].experiments];
+        updatedExps.push({
+                name: `Experiment ${updatedExps.length + 1}`,
+                hasSubProblems: false,
+                src: {
+                    aim: "Aim",
+                    algorithm: "Algorithm",
+                    program: "Program",
+                    output: ["sample1", "sample2"],
+                    result: "Result"
+                },
+                problems: []
+            });
+            return {
+                ...prevRecord,
+                cycles: prevRecord.cycles.map((cycle, index) => {
+                    if(index === cycleId) {
+                        return {
+                            ...cycle,
+                            experiments: updatedExps
+                        }
+                    }
+                    return cycle;
+                })
+            }
+        })
+    };
+
+    const removeExp = () => {
+        setRecord(prevRecord => {
+            const updatedRecord = {...prevRecord};
+            updatedRecord.cycles[cycleId].experiments.splice(id, 1);
+            return updatedRecord;
+        });
+    }
 
     return (
         <div className={`flex flex-col gap-[2px] pl-[32px]`}>
@@ -39,7 +77,6 @@ const Exp = (
                     value = {record.cycles[cycleId].experiments[id].name}
                     placeholder="Experiment Name Here"
                     onChange={(e) => {
-                        setExpName(e.target.value);
                         setRecord(prevRecord => {
                             const updatedRecord = {...prevRecord};
                             updatedRecord.cycles[cycleId].experiments[id].name = e.target.value;
@@ -48,6 +85,13 @@ const Exp = (
                     }}
                     className="border-2 border-gray-300 rounded-md p-1"
                 />
+                {id === record.cycles[cycleId].experiments.length - 1 && record.cycles[cycleId].experiments.length !== 1 && (
+                 <FiMinus 
+                     color = "red" 
+                     className = "hover:cursor-pointer" 
+                     onClick = {() => removeExp()} 
+                 /> 
+                )}
             </div>
             <AnimatePresence>
                 {show && (
@@ -90,7 +134,11 @@ const Exp = (
                 )}
             </AnimatePresence>
             {id === record.cycles[cycleId].experiments.length - 1 && (
-                <FiPlus color = "red" className = "hover:cursor-pointer" /> 
+                <FiPlus 
+                    color = "red" 
+                    className = "hover:cursor-pointer" 
+                    onClick = {() => addExp()}
+                /> 
             )}
         </div>
     )
