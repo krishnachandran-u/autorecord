@@ -70,13 +70,13 @@ const Exp = (
                             Object.keys(record.cycles[cycleId].experiments[id].src).map((key, index) => (
                             <textarea
                                 key = {index}
-                                className = "w-full border-2 border-gray-200 rounded-md overflow-y-hidden max-h-[300px]"
+                                className = "w-full border-2 border-gray-300 rounded-md overflow-y-hidden max-h-[300px]"
                                 onChange={(e) => {
                                     const textarea = e.target as HTMLTextAreaElement;
                                     textarea.style.height = "auto";
                                     textarea.style.height = textarea.scrollHeight >= 300 ? '200px' : `${textarea.scrollHeight}px`;
                                 }}
-                                placeholder = {key}
+                                placeholder = {key.charAt(0).toUpperCase() + key.slice(1)}
                             />
                             ))
                         )}

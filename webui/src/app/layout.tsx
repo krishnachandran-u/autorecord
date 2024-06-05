@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Sora } from "next/font/google";
+import { Urbanist } from "next/font/google";
 import "./globals.css";
 import { ProjectProvider } from "@/contexts/projectContext";
 
-const sora = Sora({ subsets: ["latin"] });
+const font = Urbanist({subsets: ["latin"]}); 
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ProjectProvider>
-        <body className={sora.className}>{children}</body>
+        <body className={font.className}>{children}</body>
       </ProjectProvider>
     </html>
   );

@@ -55,13 +55,13 @@ const Prob = (
                         {Object.keys(record.cycles[cycleId].experiments[expId].problems[id].src).map((key, index) => (
                             <textarea
                                 key = {index}
-                                className = "w-full border-2 border-gray-200 rounded-md overflow-y-hidden"
+                                className = "w-full border-2 border-gray-300 rounded-md overflow-y-hidden"
                                 onChange={(e) => {
                                     const textarea = e.target as HTMLTextAreaElement;
                                     textarea.style.height = "auto";
                                     textarea.style.height = `${textarea.scrollHeight}px`;
                                 }}
-                                placeholder = {key}
+                                placeholder = {key.charAt(0).toUpperCase() + key.slice(1)}
                             />
                         ))}
                     </motion.div>
