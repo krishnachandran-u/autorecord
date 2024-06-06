@@ -73,6 +73,7 @@ const Cycle = (
                     onClick={() => setShow(!show)}
                     color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all duration-300`}
                 />
+                {/*
                 <input 
                     type = "text" 
                     placeholder="Cycle Name Here"
@@ -89,6 +90,7 @@ const Cycle = (
                     }}
                     className="border-2 border-gray-300 rounded-md p-1"
                 />
+                */}
                 {id === record.cycles.length - 1 && record.cycles.length !== 1 && (
                      <FiMinus 
                          color = "red" 
