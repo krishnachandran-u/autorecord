@@ -24,11 +24,19 @@ const Exp = (
     const { record, setRecord } = useContext(ProjectContext);
     const [show, setShow] = useState(false);
 
+    const expNum = () => {
+        var num = 0;
+        for(var i = 0; i < cycleId; i++) {
+            num += record.cycles[i].experiments.length;
+        }
+        return num + id;
+    }
+
     const addExp = () => {
       setRecord(prevRecord => {
         const updatedExps = [ ...prevRecord.cycles[cycleId].experiments];
         updatedExps.push({
-                name: `Experiment ${updatedExps.length + 1}`,
+                name: `Experiment Name`,
                 hasSubProblems: false,
                 src: {
                     aim: "Aim",
@@ -67,7 +75,7 @@ const Exp = (
             <div
                 className = "flex flex-row gap-[4px] items-center"
             >
-                <div>Experiment {id + 1}</div>
+                <div>Experiment {expNum() + 1}</div>
                 <FaAngleDown 
                     onClick={() => setShow(!show)}
                     color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all duration-300`}

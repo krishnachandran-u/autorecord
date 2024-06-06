@@ -75,8 +75,8 @@ const Cycle = (
                 />
                 <input 
                     type = "text" 
-                    value = {record.cycles[id].name}
                     placeholder="Cycle Name Here"
+                    value = {record.cycles[id]?.name ?? ''}
                     onChange={(e) => {
                         setRecord(prevRecord => {
                             const updatedCycles = [...prevRecord.cycles];
@@ -115,7 +115,6 @@ const Cycle = (
                             }}
                             key = {index}
                         />
-        
                     ))}
                 </motion.div>
             )}

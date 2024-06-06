@@ -107,7 +107,7 @@ export const DummyProjectData = {
             "name": "Cycle 3",
             "experiments": [
                 {
-                    "name": "Experiment 1",
+                    "name": "Experiment 5",
                     "hasSubProblems": true,
                     "src": {
                         "aim": "Aim",
@@ -150,7 +150,7 @@ export const DummyProjectData = {
                     ],
                 },
                 {
-                    "name": "Experiment 4",
+                    "name": "Experiment 6",
                     "hasSubProblems": false,
                     "src": {
                         "aim": "Aim",
