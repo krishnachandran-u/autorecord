@@ -26,6 +26,7 @@ const Exp = (
     const { record, setRecord } = useContext(ProjectContext);
     const [show, setShow] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
+    const [showProbConfirm, setShowProbConfirm] = useState(false);
 
     const expNum = () => {
         var num = 0;
@@ -73,6 +74,43 @@ const Exp = (
             return updatedRecord;
         });
     }
+
+    const addProb = () => {
+        setRecord(prevRecord => {
+            const updatedProbs = [...prevRecord.cycles[cycleId].experiments[id].problems];
+            updatedProbs.push({
+                name: `Problem ${updatedProbs.length + 1}`,
+                src: {
+                    aim: "",
+                    algorithm: "",
+                    program: "",
+                    output: [],
+                    result: ""
+                }
+            });
+            return {
+                ...prevRecord,
+                cycles: prevRecord.cycles.map((cycle, index) => {
+                    if(index === cycleId) {
+                        return {
+                            ...cycle,
+                            experiments: cycle.experiments.map((exp, i) => {
+                                if(i === id) {
+                                    return {
+                                        ...exp,
+                                        hasSubProblems: true,
+                                        problems: updatedProbs,
+                                    };
+                                }
+                                return exp;
+                            })
+                        };
+                    }
+                    return cycle;
+                })
+            };
+        });
+    };
 
     return (
         <div className={`flex flex-col gap-[2px] pl-[32px]`}>
@@ -123,6 +161,7 @@ const Exp = (
                             animate = {{opacity: 1}}
                             exit = {{opacity: 0}}
                             transition={{duration: 0.3}}
+                            key={0}
                         >
                             <Confirm 
                                 message = "Are you sure you want to delete this experiment? (cannot be undone)"
@@ -172,9 +211,35 @@ const Exp = (
                             />
                             ))
                         )}
-                        <FiPlus color = "red" className = "hover:cursor-pointer" /> 
+                        <FiPlus 
+                            color = "red" 
+                            className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
+                            onClick={() => setShowProbConfirm(true)}
+                        />
                     </motion.div>
                 )}
+            </AnimatePresence>
+            <AnimatePresence>
+                {showProbConfirm &&
+                    <motion.div
+                        initial = {{opacity: 0}}
+                        animate = {{opacity: 1}}
+                        exit = {{opacity: 0}}
+                        transition={{duration: 0.3}}
+                        key={0}
+                    >
+                        <Confirm 
+                            message = "Are you sure want to add a problem? (Experiment will lose its current data)"
+                            onConfirm = {
+                                () => {
+                                    addProb();
+                                    setShowProbConfirm(false);
+                                }
+                            }
+                            onCancel = {() => setShowProbConfirm(false)}
+                        />
+                    </motion.div>
+                }
             </AnimatePresence>
             {id === record.cycles[cycleId].experiments.length - 1 && (
                 <FiPlus 

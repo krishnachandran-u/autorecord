@@ -66,6 +66,9 @@ const Prob = (
         setRecord(prevRecord => {
             const updatedProbs = [...prevRecord.cycles[cycleId].experiments[expId].problems];
             updatedProbs.splice(id, 1);
+            if(updatedProbs.length === 0) {
+                record.cycles[cycleId].experiments[expId].hasSubProblems = false; 
+            }
             return {
                 ...prevRecord,
                 cycles: prevRecord.cycles.map((cycle, index) => {
@@ -111,8 +114,7 @@ const Prob = (
                     className="border-2 border-gray-300 rounded-md p-1"
                 />
                 {id === record.cycles[cycleId].experiments[expId].problems.length - 1 && 
-                record.cycles[cycleId].experiments[expId].hasSubProblems && 
-                record.cycles[cycleId].experiments[expId].problems.length !== 1 && (
+                record.cycles[cycleId].experiments[expId].hasSubProblems && (
                      <FiMinus 
                          color = "red" 
                          className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 

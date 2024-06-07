@@ -108,6 +108,7 @@ const Cycle = (
                             animate = {{opacity: 1}}
                             exit = {{opacity: 0}}
                             transition={{duration: 0.3}}
+                            key={0}
                         >
                             <Confirm 
                                 message = "Are you sure you want to delete this cycle? (cannot be undone)"
