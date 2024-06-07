@@ -10,6 +10,7 @@ export const DummyProjectData = {
             "experiments": [
                 {
                     "name": "Experiment 1",
+                    "date": "2012-12-12", // Updated date value
                     "hasSubProblems": true,
                     "src": {
                         "aim": "Aim",
@@ -53,6 +54,7 @@ export const DummyProjectData = {
                 },
                 {
                     "name": "Experiment 2",
+                    "date": "2012-12-12", // Updated date value
                     "hasSubProblems": false,
                     "src": {
                         "aim": "Aim",
@@ -73,6 +75,7 @@ export const DummyProjectData = {
             "experiments": [
                 {
                     "name": "Experiment 3",
+                    "date": "2012-12-12", // Updated date value
                     "hasSubProblems": false,
                     "src": {
                         "aim": "Aim",
@@ -88,6 +91,7 @@ export const DummyProjectData = {
                 },
                 {
                     "name": "Experiment 4",
+                    "date": "2012-12-12", // Updated date value
                     "hasSubProblems": false,
                     "src": {
                         "aim": "Aim",
@@ -108,6 +112,7 @@ export const DummyProjectData = {
             "experiments": [
                 {
                     "name": "Experiment 5",
+                    "date": "2012-12-12", // Updated date value
                     "hasSubProblems": true,
                     "src": {
                         "aim": "Aim",
@@ -151,6 +156,7 @@ export const DummyProjectData = {
                 },
                 {
                     "name": "Experiment 6",
+                    "date": "2012-12-12", // Updated date value
                     "hasSubProblems": false,
                     "src": {
                         "aim": "Aim",

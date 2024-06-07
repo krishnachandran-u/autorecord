@@ -37,6 +37,7 @@ const Cycle = (
                 experiments: [
                     {
                         name: "Experiment 3",
+                        date: "dd-mm-yyyy",
                         hasSubProblems: false,
                         src: {
                             aim: "Aim",

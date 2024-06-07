@@ -40,6 +40,7 @@ const Exp = (
         const updatedExps = [ ...prevRecord.cycles[cycleId].experiments];
         updatedExps.push({
                 name: `Experiment Name`,
+                date: "dd-mm-yyyy",
                 hasSubProblems: false,
                 src: {
                     aim: "Aim",
@@ -91,6 +92,18 @@ const Exp = (
                         setRecord(prevRecord => {
                             const updatedRecord = {...prevRecord};
                             updatedRecord.cycles[cycleId].experiments[id].name = e.target.value;
+                            return updatedRecord;
+                        });
+                    }}
+                    className="border-2 border-gray-300 rounded-md p-1"
+                />
+                <input
+                    type = "date"
+                    value = {record.cycles[cycleId].experiments[id].date}
+                    onChange={(e) => {
+                        setRecord(prevRecord => {
+                            const updatedRecord = {...prevRecord};
+                            updatedRecord.cycles[cycleId].experiments[id].date = e.target.value;
                             return updatedRecord;
                         });
                     }}

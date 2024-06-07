@@ -13,6 +13,7 @@ export const ProjectContext = createContext<{
             name: string;
             experiments: {
                 name: string;
+                date: string;
                 hasSubProblems: boolean;
                 src: {
                     aim: string;
@@ -39,6 +40,7 @@ export const ProjectContext = createContext<{
             name: string;
             experiments: {
                 name: string;
+                date: string;
                 hasSubProblems: boolean;
                 src: {
                     aim: string;
@@ -73,6 +75,7 @@ export const ProjectProvider = ({children}:{children: ReactNode}) => {
             name: string;
             experiments: {
                 name: string;
+                date: string;
                 hasSubProblems: boolean;
                 src: {
                     aim: string;
