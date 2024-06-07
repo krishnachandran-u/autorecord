@@ -34,8 +34,10 @@ export default function Home() {
         <StatusBar /> 
         <div className = "flex lg:flex-row flex-col gap-[24px]">
           <Options /> 
-          <div className = {`border-slate-600 border-[3px] w-full rounded-xl min-h-[400px] flex justify-center overflow-x-hidden ${record === null? "items-center" : ""}`}>
+          <div className = {`border-slate-600 border-[3px] w-full rounded-xl min-h-[400px] flex justify-center overflow-x-hidden h-full ${record === null? "items-center" : ""}`}>
             <Canvas />
+          </div>
+          <div>
           </div>
         </div>
       </div>

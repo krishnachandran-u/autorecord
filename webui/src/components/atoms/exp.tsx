@@ -79,10 +79,10 @@ const Exp = (
             <div
                 className = "flex flex-row gap-[4px] items-center"
             >
-                <div>Experiment {expNum() + 1}</div>
+                <div className = "whitespace-nowrap">Experiment {expNum() + 1}</div>
                 <FaAngleDown 
                     onClick={() => setShow(!show)}
-                    color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all duration-300`}
+                    color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all min-w-[20px] min-h-[20px] duration-300`}
                 />
                 <input 
                     type = "text" 
@@ -107,12 +107,12 @@ const Exp = (
                             return updatedRecord;
                         });
                     }}
-                    className="border-2 border-gray-300 rounded-md p-1"
+                    className="border-2 border-gray-300 rounded-md p-1 min-w-[128px]"
                 />
                 {id === record.cycles[cycleId].experiments.length - 1 && record.cycles[cycleId].experiments.length !== 1 && (
                     <FiMinus 
                         color = "red" 
-                        className = "hover:cursor-pointer" 
+                        className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
                         onClick = {() => setShowConfirm(true)} 
                     /> 
                 )}
@@ -179,7 +179,7 @@ const Exp = (
             {id === record.cycles[cycleId].experiments.length - 1 && (
                 <FiPlus 
                     color = "red" 
-                    className = "hover:cursor-pointer" 
+                    className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
                     onClick = {() => addExp()}
                 /> 
             )}

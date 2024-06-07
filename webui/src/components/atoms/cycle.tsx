@@ -74,7 +74,7 @@ const Cycle = (
                 <div>Cycle {id + 1}</div>
                 <FaAngleDown 
                     onClick={() => setShow(!show)}
-                    color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all duration-300`}
+                    color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all duration-300 min-w-[20px] min-h-[20px]`}
                 />
                 {/*
                 <input 
@@ -97,7 +97,7 @@ const Cycle = (
                 {id === record.cycles.length - 1 && record.cycles.length !== 1 && (
                      <FiMinus 
                          color = "red" 
-                         className = "hover:cursor-pointer" 
+                         className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
                          onClick = {() => setShowConfirm(true)} 
                      /> 
                  )}  
@@ -148,7 +148,7 @@ const Cycle = (
                 {id === record.cycles.length - 1 && (
                     <FiPlus 
                         color = "red" 
-                        className = "hover:cursor-pointer" 
+                        className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
                         onClick = {() => addCycle()} 
                     /> 
                 )}

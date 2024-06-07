@@ -92,10 +92,10 @@ const Prob = (
     return (
         <div className={`flex flex-col gap-[2px] pl-[32px]`}>
             <div className="flex flex-row gap-[4px] items-center">
-                <div>Problem {id + 1}</div>
+                <div className="whitespace-nowrap">Problem {id + 1}</div>
                 <FaAngleDown 
                     onClick={() => setShow(!show)}
-                    color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all duration-300`}
+                    color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all duration-300 min-w-[20px] min-h-[20px]`}
                 />
                 <input 
                     type = "text" 
@@ -115,7 +115,7 @@ const Prob = (
                 record.cycles[cycleId].experiments[expId].problems.length !== 1 && (
                      <FiMinus 
                          color = "red" 
-                         className = "hover:cursor-pointer" 
+                         className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
                          onClick = {() => setShowConfirm(true)} 
                      /> 
                 )}
@@ -126,6 +126,7 @@ const Prob = (
                             animate = {{opacity: 1}}
                             exit = {{opacity: 0}}
                             transition={{duration: 0.3}}
+                            key={0}
                         >
                             <Confirm 
                                 message = "Are you sure you want to delete this problem? (cannot be undone)"
@@ -167,7 +168,7 @@ const Prob = (
             {id === record.cycles[cycleId].experiments[expId].problems.length - 1 && (
                 <FiPlus 
                     color = "red" 
-                    className = "hover:cursor-pointer" 
+                    className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
                     onClick = {() => addProb()}
                 /> 
             )}
