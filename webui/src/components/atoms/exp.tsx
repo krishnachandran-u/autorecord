@@ -11,6 +11,8 @@ import { ProjectContext } from "@/contexts/projectContext";
 
 import Prob from "@/components/atoms/prob";
 
+import Confirm from "@/components/atoms/confirm";
+
 type ExpProps = {
     cycleId: number,
     id: number
@@ -23,6 +25,7 @@ const Exp = (
     const { cycleId, id } = props;
     const { record, setRecord } = useContext(ProjectContext);
     const [show, setShow] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const expNum = () => {
         var num = 0;
@@ -94,12 +97,31 @@ const Exp = (
                     className="border-2 border-gray-300 rounded-md p-1"
                 />
                 {id === record.cycles[cycleId].experiments.length - 1 && record.cycles[cycleId].experiments.length !== 1 && (
-                 <FiMinus 
-                     color = "red" 
-                     className = "hover:cursor-pointer" 
-                     onClick = {() => removeExp()} 
-                 /> 
+                    <FiMinus 
+                        color = "red" 
+                        className = "hover:cursor-pointer" 
+                        onClick = {() => setShowConfirm(true)} 
+                    /> 
                 )}
+                <AnimatePresence>
+                {showConfirm && (
+                    <motion.div
+                        initial = {{opacity: 0}}
+                        animate = {{opacity: 1}}
+                        exit = {{opacity: 0}}
+                        transition={{duration: 0.3}}
+                    >
+                        <Confirm 
+                            message = "Are you sure you want to delete this experiment? (cannot be undone)"
+                            onConfirm = {() => {
+                                removeExp();
+                                setShowConfirm(false);
+                            }}
+                            onCancel = {() => setShowConfirm(false)}
+                        />
+                    </motion.div>
+                )}
+                </AnimatePresence>
             </div>
             <AnimatePresence>
                 {show && (

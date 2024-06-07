@@ -9,7 +9,7 @@ const Confirm = (
 ) => {
     return (
        <div className={`fixed w-screen h-screen flex justify-center items-center top-0 left-0 bg-opacity-50 bg-slate-800 ${font.className}`}>
-            <div className="w-[300px] h-[200px] bg-white shadow-2xl z-[100] rounded-[16px] flex flex-col justify-between items-center p-[16px] gap-[8px] shadow-black">
+            <div className="w-[300px] h-[150px] bg-white shadow-2xl z-[100] rounded-[16px] flex flex-col justify-between items-center p-[16px] gap-[8px] shadow-black">
                 <div
                     className="flex justify-center items-center w-full h-full"
                 >{message}</div>

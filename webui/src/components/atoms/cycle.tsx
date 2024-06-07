@@ -109,7 +109,7 @@ const Cycle = (
                         transition={{duration: 0.3}}
                     >
                         <Confirm 
-                            message = "Are you sure you want to delete this cycle? (This action cannot be undone)"
+                            message = "Are you sure you want to delete this cycle? (cannot be undone)"
                             onConfirm = {
                                 () => {
                                     removeCycle();
