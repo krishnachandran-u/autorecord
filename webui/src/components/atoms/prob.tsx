@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { ProjectContext } from "@/contexts/projectContext";
 
 import { FiPlus } from "react-icons/fi";
+import { FiMinus } from "react-icons/fi";
 
 import TextInput from "./TextInput";
 
@@ -22,6 +23,69 @@ const Prob = (
     const { cycleId, expId, id } = props;
     const { record, setRecord } = useContext(ProjectContext);
     const [show, setShow] = useState(false);
+
+    const addProb = () => {
+        setRecord(prevRecord => {
+            const updatedProbs = [...prevRecord.cycles[cycleId].experiments[expId].problems];
+            updatedProbs.push({
+                name: `Problem ${updatedProbs.length + 1}`,
+                src: {
+                    aim: "",
+                    algorithm: "",
+                    program: "",
+                    output: [],
+                    result: ""
+                }
+            });
+            return {
+                ...prevRecord,
+                cycles: prevRecord.cycles.map((cycle, index) => {
+                    if(index === cycleId) {
+                        return {
+                            ...cycle,
+                            experiments: cycle.experiments.map((exp, i) => {
+                                if(i === expId) {
+                                    return {
+                                        ...exp,
+                                        problems: updatedProbs
+                                    };
+                                }
+                                return exp;
+                            })
+                        };
+                    }
+                    return cycle;
+                })
+            };
+        });
+    };
+
+    const removeProb = () => {
+        setRecord(prevRecord => {
+            const updatedProbs = [...prevRecord.cycles[cycleId].experiments[expId].problems];
+            updatedProbs.splice(id, 1);
+            return {
+                ...prevRecord,
+                cycles: prevRecord.cycles.map((cycle, index) => {
+                    if(index === cycleId) {
+                        return {
+                            ...cycle,
+                            experiments: cycle.experiments.map((exp, i) => {
+                                if(i === expId) {
+                                    return {
+                                        ...exp,
+                                        problems: updatedProbs
+                                    };
+                                }
+                                return exp;
+                            })
+                        };
+                    }
+                    return cycle;
+                })
+            };
+        });
+    };
 
     return (
         <div className={`flex flex-col gap-[2px] pl-[32px]`}>
@@ -44,6 +108,15 @@ const Prob = (
                     }}
                     className="border-2 border-gray-300 rounded-md p-1"
                 />
+                {id === record.cycles[cycleId].experiments[expId].problems.length - 1 && 
+                record.cycles[cycleId].experiments[expId].hasSubProblems && 
+                record.cycles[cycleId].experiments[expId].problems.length !== 1 && (
+                     <FiMinus 
+                         color = "red" 
+                         className = "hover:cursor-pointer" 
+                         onClick = {() => removeProb()} 
+                     /> 
+                 )}
             </div>
             <AnimatePresence>
                 {show && (
@@ -71,7 +144,11 @@ const Prob = (
                 )}
             </AnimatePresence>
             {id === record.cycles[cycleId].experiments[expId].problems.length - 1 && (
-                <FiPlus color = "red" className = "hover:cursor-pointer" /> 
+                <FiPlus 
+                    color = "red" 
+                    className = "hover:cursor-pointer" 
+                    onClick = {() => addProb()}
+                /> 
             )}
         </div> 
     )
