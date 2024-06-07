@@ -8,6 +8,7 @@ import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 
 import TextInput from "./TextInput";
+import Confirm from "@/components/atoms/confirm";
 
 type ProbProps = {
     cycleId: number,
@@ -23,6 +24,7 @@ const Prob = (
     const { cycleId, expId, id } = props;
     const { record, setRecord } = useContext(ProjectContext);
     const [show, setShow] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const addProb = () => {
         setRecord(prevRecord => {
@@ -114,9 +116,28 @@ const Prob = (
                      <FiMinus 
                          color = "red" 
                          className = "hover:cursor-pointer" 
-                         onClick = {() => removeProb()} 
+                         onClick = {() => setShowConfirm(true)} 
                      /> 
-                 )}
+                )}
+                <AnimatePresence>
+                    {showConfirm && (
+                        <motion.div
+                            initial = {{opacity: 0}}
+                            animate = {{opacity: 1}}
+                            exit = {{opacity: 0}}
+                            transition={{duration: 0.3}}
+                        >
+                            <Confirm 
+                                message = "Are you sure you want to delete this problem? (cannot be undone)"
+                                onConfirm = {() => {
+                                    removeProb();
+                                    setShowConfirm(false);
+                                }}
+                                onCancel = {() => setShowConfirm(false)}
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
             <AnimatePresence>
                 {show && (

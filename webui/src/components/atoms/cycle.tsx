@@ -101,25 +101,25 @@ const Cycle = (
                      /> 
                  )}  
                 <AnimatePresence>
-                {showConfirm &&
-                    <motion.div
-                        initial = {{opacity: 0}}
-                        animate = {{opacity: 1}}
-                        exit = {{opacity: 0}}
-                        transition={{duration: 0.3}}
-                    >
-                        <Confirm 
-                            message = "Are you sure you want to delete this cycle? (cannot be undone)"
-                            onConfirm = {
-                                () => {
-                                    removeCycle();
-                                    setShowConfirm(false);
+                    {showConfirm &&
+                        <motion.div
+                            initial = {{opacity: 0}}
+                            animate = {{opacity: 1}}
+                            exit = {{opacity: 0}}
+                            transition={{duration: 0.3}}
+                        >
+                            <Confirm 
+                                message = "Are you sure you want to delete this cycle? (cannot be undone)"
+                                onConfirm = {
+                                    () => {
+                                        removeCycle();
+                                        setShowConfirm(false);
+                                    }
                                 }
-                            }
-                            onCancel = {() => setShowConfirm(false)}
-                        />
-                    </motion.div>
-                }
+                                onCancel = {() => setShowConfirm(false)}
+                            />
+                        </motion.div>
+                    }
                 </AnimatePresence>
             </div>
             <AnimatePresence>

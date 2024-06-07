@@ -104,23 +104,23 @@ const Exp = (
                     /> 
                 )}
                 <AnimatePresence>
-                {showConfirm && (
-                    <motion.div
-                        initial = {{opacity: 0}}
-                        animate = {{opacity: 1}}
-                        exit = {{opacity: 0}}
-                        transition={{duration: 0.3}}
-                    >
-                        <Confirm 
-                            message = "Are you sure you want to delete this experiment? (cannot be undone)"
-                            onConfirm = {() => {
-                                removeExp();
-                                setShowConfirm(false);
-                            }}
-                            onCancel = {() => setShowConfirm(false)}
-                        />
-                    </motion.div>
-                )}
+                    {showConfirm && (
+                        <motion.div
+                            initial = {{opacity: 0}}
+                            animate = {{opacity: 1}}
+                            exit = {{opacity: 0}}
+                            transition={{duration: 0.3}}
+                        >
+                            <Confirm 
+                                message = "Are you sure you want to delete this experiment? (cannot be undone)"
+                                onConfirm = {() => {
+                                    removeExp();
+                                    setShowConfirm(false);
+                                }}
+                                onCancel = {() => setShowConfirm(false)}
+                            />
+                        </motion.div>
+                    )}
                 </AnimatePresence>
             </div>
             <AnimatePresence>
