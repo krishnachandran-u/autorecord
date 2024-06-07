@@ -37,8 +37,6 @@ export default function Home() {
           <div className = {`border-slate-600 border-[3px] w-full rounded-xl min-h-[400px] flex justify-center overflow-x-hidden h-full ${record === null? "items-center" : ""}`}>
             <Canvas />
           </div>
-          <div>
-          </div>
         </div>
       </div>
     </main>  
