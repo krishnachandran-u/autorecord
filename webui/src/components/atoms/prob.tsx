@@ -159,7 +159,7 @@ const Prob = (
                                 onChange={(e) => {
                                     const textarea = e.target as HTMLTextAreaElement;
                                     textarea.style.height = "auto";
-                                    textarea.style.height = `${textarea.scrollHeight}px`;
+                                    textarea.style.height = textarea.scrollHeight >= 200 ? '200px' : `${textarea.scrollHeight}px`;
                                 }}
                                 placeholder = {key.charAt(0).toUpperCase() + key.slice(1)}
                             />
