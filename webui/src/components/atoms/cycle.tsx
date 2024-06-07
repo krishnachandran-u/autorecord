@@ -13,6 +13,7 @@ import { ProjectContext } from "@/contexts/projectContext";
 import { FaAngleDown } from "react-icons/fa";
 
 import Exp from "@/components/atoms/exp";
+import Confirm from "@/components/atoms/confirm";
 
 type CycleProps = {
     id: number
@@ -26,6 +27,7 @@ const Cycle = (
     const {id} = props;   
     const {record, setRecord } = useContext(ProjectContext);
     const [show, setShow] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const addCycle = () => {
         setRecord(prevRecord => {
@@ -95,9 +97,30 @@ const Cycle = (
                      <FiMinus 
                          color = "red" 
                          className = "hover:cursor-pointer" 
-                         onClick = {() => removeCycle()} 
+                         onClick = {() => setShowConfirm(true)} 
                      /> 
                  )}  
+                <AnimatePresence>
+                {showConfirm &&
+                    <motion.div
+                        initial = {{opacity: 0}}
+                        animate = {{opacity: 1}}
+                        exit = {{opacity: 0}}
+                        transition={{duration: 0.3}}
+                    >
+                        <Confirm 
+                            message = "Are you sure you want to delete this cycle? (This action cannot be undone)"
+                            onConfirm = {
+                                () => {
+                                    removeCycle();
+                                    setShowConfirm(false);
+                                }
+                            }
+                            onCancel = {() => setShowConfirm(false)}
+                        />
+                    </motion.div>
+                }
+                </AnimatePresence>
             </div>
             <AnimatePresence>
             {show && (
