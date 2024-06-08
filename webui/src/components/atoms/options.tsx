@@ -12,15 +12,18 @@ const Options = () => {
 
     const save = async () => {
       try {
-      const response = await axios.post("http://localhost:5000/api/save", {
-        "json_data" : JSON.stringify(record),
-        "images" : images, 
-      }, {
+      const formData = new FormData();
+      formData.append("json_data", JSON.stringify(record));
+      images.forEach((image) => {
+        formData.append("images", image);
+      });
+
+      const response = await axios.post("http://localhost:5000/api/save", formData, {
         headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "multipart/form-data"
         }
       });
+
       console.log(response.data);
       } catch (error) {
       console.error(error);
