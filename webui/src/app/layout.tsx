@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import "./globals.css";
 import { ProjectProvider } from "@/contexts/projectContext";
+import { ImagesProvider } from "@/contexts/imagesContext";
 
 const font = Urbanist({subsets: ["latin"]}); 
 
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ProjectProvider>
-        <body className={font.className}>{children}</body>
+        <ImagesProvider>
+          <body className={font.className}>{children}</body>
+        </ImagesProvider>
       </ProjectProvider>
     </html>
   );
