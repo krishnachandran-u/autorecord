@@ -10,20 +10,35 @@ import { ProjectContext } from "@/contexts/projectContext";
 import StatusBar from "@/components/atoms/statusbar";
 import Options from "@/components/atoms/options";
 import { DummyProjectData } from "@/constants/projectData";
+import { ImagesContext } from "@/contexts/imagesContext";
 
 import { Sora } from "next/font/google";
 const sora = Sora({subsets: ["latin"], weight: ["600"]});
 
 export default function Home() {
   const { record , setRecord } = useContext(ProjectContext);
+  const { images, setImages } = useContext(ImagesContext);
+
+  const sampleurl = "https://cdn.shopify.com/s/files/1/0234/8017/2591/products/young-man-in-bright-fashion_925x_f7029e2b-80f0-4a40-a87b-834b9a283c39.jpg?v=1572867553";
+  const fileName = "sample.jpg";
 
   useEffect(() => {
     setRecord(DummyProjectData);
+    fetch(sampleurl)
+      .then(response => response.blob())
+      .then(blob => {
+        const file = new File([blob], fileName);
+        setImages([...images, file]);
+      })
+      .catch(error => {
+        console.error('Error fetching image:', error);
+      });
   }, []);
 
   useEffect(() => {
     console.log(record);
-  }, [record]);
+    console.log(images);
+  }, [record, images]);
 
   return (
     <main className = "lg:p-[96px] md:p-[56px] py-[32px] px-[24px] flex flex-col size-full md:gap-[56px] gap-[40px] transition-all duration-300 h-full">

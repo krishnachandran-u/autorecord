@@ -1,10 +1,12 @@
 from flask import Flask, request, send_file
+from flask_cors import CORS
 import os
 from shutil import rmtree
 import json
 import base64
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 save_dir = './../.appdata/'
 app.config['SAVE_DIR'] = save_dir
 
