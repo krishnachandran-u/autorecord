@@ -50,12 +50,7 @@ def load_project(code):
         for image in os.listdir(dir):
             image_path = os.path.join(dir, image)
             if os.path.isfile(image_path) and str(image).lower().endswith(('.png', '.jpg', '.jpeg')):
-                with open(image_path, 'rb') as f:
-                    image_data = base64.b64encode(f.read()).decode('utf-8')
-                images.append({
-                    "name" : image,
-                    "data" : image_data 
-                })
+                images.append(image)
 
         data['images'] = images
         return data

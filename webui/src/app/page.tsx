@@ -22,17 +22,29 @@ export default function Home() {
   const sampleurl = "https://cdn.shopify.com/s/files/1/0234/8017/2591/products/young-man-in-bright-fashion_925x_f7029e2b-80f0-4a40-a87b-834b9a283c39.jpg?v=1572867553";
   const fileName = "sample.jpg";
 
-  useEffect(() => {
-    setRecord(DummyProjectData);
-    fetch(sampleurl)
-      .then(response => response.blob())
-      .then(blob => {
-        const file = new File([blob], fileName);
-        setImages([...images, file]);
-      })
-      .catch(error => {
-        console.error('Error fetching image:', error);
+  const load = async ({ code }: { code: string }) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/load/${code}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
+
+      if (response.ok) {
+        const data = await response.json();
+        setRecord(data.json_data);
+        setImages(data.images);
+      } else {
+        console.error('Failed to load data');
+      }
+    } catch (error) {
+      console.error('Error loading data:', error);
+    }
+  };
+
+  useEffect(() => {
+    load({ code: "binary-search" });
   }, []);
 
   useEffect(() => {
