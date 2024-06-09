@@ -1,6 +1,7 @@
 "use client"
 import React, { useCallback, useContext } from 'react';
 import { useDropzone, DropzoneOptions } from 'react-dropzone';
+import { IoIosClose } from "react-icons/io";
 
 import { ImagesContext } from '@/contexts/imagesContext';
 import { ProjectContext } from '@/contexts/projectContext';
@@ -94,29 +95,41 @@ function MyDropzone({ props } : { props: MyDropzoneProps }) {
   });
 
   return (
-    <div>
+    <div className="flex flex-col gap-[2px]">
       <div
         {...getRootProps()}
         className='border-2 border-gray-300 border-dashed p-4 rounded-lg w-full flex justify-center items-center cursor-pointer h-[64px]]'
       >
-          <input {...getInputProps() as React.InputHTMLAttributes<HTMLInputElement>} />
-          {isDragActive ? (
-            <p>Drop the files here ...</p>
-          ) : (
-            <p>Drag n drop some files here, or click to select files</p>
-          )}
+        <input {...getInputProps() as React.InputHTMLAttributes<HTMLInputElement>} />
+        {isDragActive ? (
+          <p>Drop the files here ...</p>
+        ) : (
+          <p>Drag n drop some files here, or click to select files</p>
+        )}
       </div>
-      <div className="flex flex-row gap-[8px]">
-        {(probId !== -1? 
-            record.cycles[cycleId].experiments[expId].problems[probId].src.output : 
-            record.cycles[cycleId].experiments[expId].src.output
-          ).map((image, index) => (
-            <div 
-              key={index}
-              className = "w-[64px] h-[64px] bg-center bg-cover bg-no-repeat"
-            >
-            </div>
-          ))}
+      <div className="flex flex-row gap-[2px]">
+        {(probId !== -1
+          ? record.cycles[cycleId].experiments[expId].problems[probId].src.output
+          : record.cycles[cycleId].experiments[expId].src.output
+        ).map((imageName, index) => {
+          const image = images.find((img) => img.name === imageName);
+          const backgroundImage = image ? `url(${image})` : '';
+          if (image) {
+            return (
+              <div
+                key={index}
+                className="w-[64px] h-[64px] bg-center bg-cover bg-no-repeat flex flex-row justify-end items-start rounded-lg border-2 border-slate-300"
+                style={{ backgroundImage: backgroundImage }}
+              >
+                <IoIosClose
+                  color="red"
+                  className="min-w-[18px] min-h-[18px] hover:cursor-pointer transition-all duration-300 hover:scale-110"
+                />
+              </div>
+            );
+          }
+          return null;
+        })}
       </div>
     </div>
   );
