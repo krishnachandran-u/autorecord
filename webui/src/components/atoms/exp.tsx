@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { ProjectContext } from "@/contexts/projectContext";
 
 import Prob from "@/components/atoms/prob";
+import MyDropzone from "./dropzone";
 
 import Confirm from "@/components/atoms/confirm";
 
@@ -198,18 +199,36 @@ const Exp = (
                             ))
                         )}
                         {!record.cycles[cycleId].experiments[id].hasSubProblems && (
-                            Object.keys(record.cycles[cycleId].experiments[id].src).map((key, index) => (
-                            <textarea
-                                key = {index}
-                                className = "w-full border-2 border-gray-300 rounded-md max-h-[300px] min-h-[64px] overflow-y-scroll"
-                                onChange={(e) => {
-                                    const textarea = e.target as HTMLTextAreaElement;
-                                    textarea.style.height = "auto";
-                                    textarea.style.height = textarea.scrollHeight >= 200 ? '200px' : `${textarea.scrollHeight}px`;
-                                }}
-                                placeholder = {key.charAt(0).toUpperCase() + key.slice(1)}
-                            />
-                            ))
+                            Object.keys(record.cycles[cycleId].experiments[id].src).map((key, index) => {
+                                if (key !== "output") {
+                                    return (
+                                        <textarea
+                                            key={index}
+                                            className="w-full border-2 border-gray-300 rounded-md max-h-[300px] min-h-[64px] overflow-y-scroll"
+                                            onChange={(e) => {
+                                                const textarea = e.target as HTMLTextAreaElement;
+                                                textarea.style.height = "auto";
+                                                textarea.style.height = textarea.scrollHeight >= 200 ? '200px' : `${textarea.scrollHeight}px`;
+                                            }}
+                                            placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+                                        />
+                                    );
+                                } else {
+                                    return (
+                                        <div
+                                            key = {index}
+                                        >
+                                            <MyDropzone
+                                                props={{
+                                                    cycleId: cycleId,
+                                                    expId: id,
+                                                    probId: -1
+                                                }}
+                                            />
+                                        </div>
+                                    );
+                                }
+                            })
                         )}
                         <FiPlus 
                             color = "red" 

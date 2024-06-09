@@ -12,6 +12,8 @@ type MyDropzoneProps = {
 }
 
 function MyDropzone({ props } : { props: MyDropzoneProps }) {
+  const { cycleId, expId, probId } = props;
+
   const { images, setImages } = useContext(ImagesContext);
   const { record, setRecord } = useContext(ProjectContext);
 
@@ -92,16 +94,30 @@ function MyDropzone({ props } : { props: MyDropzoneProps }) {
   });
 
   return (
-    <div 
+    <div>
+      <div
         {...getRootProps()}
         className='border-2 border-gray-300 border-dashed p-4 rounded-lg w-full flex justify-center items-center cursor-pointer h-[64px]]'
-    >
-      <input {...getInputProps() as React.InputHTMLAttributes<HTMLInputElement>} />
-      {isDragActive ? (
-        <p>Drop the files here ...</p>
-      ) : (
-        <p>Drag n drop some files here, or click to select files</p>
-      )}
+      >
+          <input {...getInputProps() as React.InputHTMLAttributes<HTMLInputElement>} />
+          {isDragActive ? (
+            <p>Drop the files here ...</p>
+          ) : (
+            <p>Drag n drop some files here, or click to select files</p>
+          )}
+      </div>
+      <div className="flex flex-row gap-[8px]">
+        {(probId !== -1? 
+            record.cycles[cycleId].experiments[expId].problems[probId].src.output : 
+            record.cycles[cycleId].experiments[expId].src.output
+          ).map((image, index) => (
+            <div 
+              key={index}
+              className = "w-[64px] h-[64px] bg-center bg-cover bg-no-repeat"
+            >
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

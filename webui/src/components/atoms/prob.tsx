@@ -6,7 +6,7 @@ import { ProjectContext } from "@/contexts/projectContext";
 
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
-
+import MyDropzone from "./dropzone";
 import TextInput from "./TextInput";
 import Confirm from "@/components/atoms/confirm";
 
@@ -152,18 +152,36 @@ const Prob = (
                         className = {`flex flex-col gap-[2px] pl-[32px] ${show ? "block" : "hidden"}`}
                         key = {0}
                     >
-                        {Object.keys(record.cycles[cycleId].experiments[expId].problems[id].src).map((key, index) => (
-                            <textarea
-                                key = {index}
-                                className = "w-full border-2 border-gray-300 rounded-md overflow-y-hidden"
-                                onChange={(e) => {
-                                    const textarea = e.target as HTMLTextAreaElement;
-                                    textarea.style.height = "auto";
-                                    textarea.style.height = textarea.scrollHeight >= 200 ? '200px' : `${textarea.scrollHeight}px`;
-                                }}
-                                placeholder = {key.charAt(0).toUpperCase() + key.slice(1)}
-                            />
-                        ))}
+                        {Object.keys(record.cycles[cycleId].experiments[expId].problems[id].src).map((key, index) => {
+                            if (key !== "output") {
+                                return (
+                                    <textarea
+                                        key={index}
+                                        className="w-full border-2 border-gray-300 rounded-md overflow-y-hidden"
+                                        onChange={(e) => {
+                                            const textarea = e.target as HTMLTextAreaElement;
+                                            textarea.style.height = "auto";
+                                            textarea.style.height = textarea.scrollHeight >= 200 ? '200px' : `${textarea.scrollHeight}px`;
+                                        }}
+                                        placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+                                    />
+                                );
+                            } else {
+                                return (
+                                    <div
+                                        key={index}
+                                    >
+                                        <MyDropzone
+                                            props={{
+                                                cycleId: cycleId,
+                                                expId: expId,
+                                                probId: id,
+                                            }}
+                                        />
+                                    </div>
+                                );
+                            }
+                        })}
                     </motion.div>
                 )}
             </AnimatePresence>
