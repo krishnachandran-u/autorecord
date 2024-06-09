@@ -230,11 +230,13 @@ const Exp = (
                                 }
                             })
                         )}
-                        <FiPlus 
-                            color = "red" 
-                            className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
-                            onClick={() => setShowProbConfirm(true)}
-                        />
+                        {!record.cycles[cycleId].experiments[id].hasSubProblems && (
+                            <FiPlus 
+                                color = "red" 
+                                className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
+                                onClick={() => setShowProbConfirm(true)}
+                            />
+                        )}
                     </motion.div>
                 )}
             </AnimatePresence>
