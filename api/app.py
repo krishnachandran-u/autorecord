@@ -6,7 +6,7 @@ import json
 import base64
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app, support_credentials=True)
 save_dir = './../.appdata/'
 app.config['SAVE_DIR'] = save_dir
 
@@ -50,7 +50,11 @@ def load_project(code):
         for image in os.listdir(dir):
             image_path = os.path.join(dir, image)
             if os.path.isfile(image_path) and str(image).lower().endswith(('.png', '.jpg', '.jpeg')):
-                images.append(image)
+                with open(image_path, 'rb') as img_file:
+                    images.append({
+                        "name" : image,
+                        "data" : base64.b64encode(img_file.read()).decode('utf-8')
+                    })
 
         data['images'] = images
         return data

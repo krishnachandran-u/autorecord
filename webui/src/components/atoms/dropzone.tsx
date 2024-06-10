@@ -113,7 +113,7 @@ function MyDropzone({ props } : { props: MyDropzoneProps }) {
           : record.cycles[cycleId].experiments[expId].src.output
         ).map((imageName, index) => {
           const image = images.find((img) => img.name === imageName);
-          const backgroundImage = image ? `url(${image})` : '';
+          const backgroundImage = image ? `url(${URL.createObjectURL(image)})` : '';
           if (image) {
             return (
               <div

@@ -11,6 +11,7 @@ import StatusBar from "@/components/atoms/statusbar";
 import Options from "@/components/atoms/options";
 import { DummyProjectData } from "@/constants/projectData";
 import { ImagesContext } from "@/contexts/imagesContext";
+import axios from "axios";
 
 import { Sora } from "next/font/google";
 const sora = Sora({subsets: ["latin"], weight: ["600"]});
@@ -19,22 +20,27 @@ export default function Home() {
   const { record , setRecord } = useContext(ProjectContext);
   const { images, setImages } = useContext(ImagesContext);
 
-  const sampleurl = "https://cdn.shopify.com/s/files/1/0234/8017/2591/products/young-man-in-bright-fashion_925x_f7029e2b-80f0-4a40-a87b-834b9a283c39.jpg?v=1572867553";
-  const fileName = "sample.jpg";
-
+  //const sampleurl = "https://cdn.shopify.com/s/files/1/0234/8017/2591/products/young-man-in-bright-fashion_925x_f7029e2b-80f0-4a40-a87b-834b9a283c39.jpg?v=1572867553";
+  //const fileName = "sample.jpg";
   const load = async ({ code }: { code: string }) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/load/${code}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.get(`http://localhost:5000/api/load/${code}`);
 
-      if (response.ok) {
-        const data = await response.json();
+      if (response.status === 200) {
+        const data = response.data;
         setRecord(data.json_data);
-        setImages(data.images);
+        
+        const imageFiles = data.images.map((image: { name: string, data: string }) => {
+          const byteCharacters = atob(image.data);
+          const byteArrays = [];
+          for (let i = 0; i < byteCharacters.length; i++) {
+            byteArrays.push(byteCharacters.charCodeAt(i));
+          }
+          const byteArray = new Uint8Array(byteArrays);
+          return new File([byteArray], image.name, { type: "image/jpeg" });
+        });
+        
+        setImages(imageFiles);
       } else {
         console.error('Failed to load data');
       }

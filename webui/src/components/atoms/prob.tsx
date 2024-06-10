@@ -157,7 +157,7 @@ const Prob = (
                                 return (
                                     <textarea
                                         key={index}
-                                        className="w-full border-2 border-gray-300 rounded-md overflow-y-hidden"
+                                        className="w-full border-2 border-gray-300 rounded-md max-h-[300px] min-h-[64px] overflow-y-scroll"
                                         onChange={(e) => {
                                             const textarea = e.target as HTMLTextAreaElement;
                                             textarea.style.height = "auto";
