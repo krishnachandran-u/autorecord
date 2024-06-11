@@ -15,13 +15,13 @@ const Confirm = (
                 >{message}</div>
                 <div className = "flex flex-row justify-between items-center w-full gap-[16px]">
                     <button 
-                        className = "flex-1 bg-red-500 text-white rounded-lg p-[8px] hover:bg-red-600 transition-all duration-300"
+                        className = "flex-1 text-red-600 p-[8px] font-semibold"
                         onClick={onConfirm}
                     >
                         Yes
                     </button>
                     <button 
-                        className = "flex-1 bg-slate-200 rounded-lg p-[8px] hover:bg-slate-300 transition-all duration-300"
+                        className = "flex-1 p-[8px] font-semibold"
                         onClick={onCancel}
                     >
                         No

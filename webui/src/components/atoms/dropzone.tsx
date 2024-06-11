@@ -1,7 +1,9 @@
 "use client"
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useDropzone, DropzoneOptions } from 'react-dropzone';
 import { IoIosClose } from "react-icons/io";
+import Confirm from '@/components/atoms/confirm';
+import { motion, AnimatePresence } from 'framer';
 
 import { ImagesContext } from '@/contexts/imagesContext';
 import { ProjectContext } from '@/contexts/projectContext';
@@ -17,6 +19,9 @@ function MyDropzone({ props } : { props: MyDropzoneProps }) {
 
   const { images, setImages } = useContext(ImagesContext);
   const { record, setRecord } = useContext(ProjectContext);
+
+  const [showImageDeleteConfirm, setShowImageDeleteConfirm] = useState(false);
+  const [imageNametoDelete, setImageNametoDelete] = useState('');
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setImages([...images, ...acceptedFiles]);
@@ -86,6 +91,72 @@ function MyDropzone({ props } : { props: MyDropzoneProps }) {
     });
   }, []);
 
+  const DeleteImage = ({imageName} : {imageName : string}) => {
+    setImages(images.filter((image) => image.name !== imageName));
+    setRecord((prevRecord) => {
+      if(props.probId == -1) {
+        const updatedOutput = prevRecord.cycles[props.cycleId].experiments[props.expId].src.output.filter((name) => name !== imageName);
+        return {
+          ...prevRecord,
+          cycles: prevRecord.cycles.map((cycle, cycleIndex) => {
+            if(cycleIndex === props.cycleId) {
+              return {
+                ...cycle,
+                experiments: cycle.experiments.map((exp, expIndex) => {
+                  if(expIndex === props.expId) {
+                    return {
+                      ...exp,
+                      src: {
+                        ...exp.src,
+                        output: updatedOutput
+                      }
+                    }
+                  }
+                  return exp;
+                })
+              }
+            }
+            return cycle;
+          })
+        }
+      }
+      else {
+        const updatedOutput = prevRecord.cycles[props.cycleId].experiments[props.expId].problems[props.probId].src.output.filter((name) => name !== imageName);
+        return {
+          ...prevRecord,
+          cycles: prevRecord.cycles.map((cycle, cycleIndex) => {
+            if(cycleIndex === props.cycleId) {
+              return {
+                ...cycle,
+                experiments: cycle.experiments.map((exp, expIndex) => {
+                  if(expIndex === props.expId) {
+                    return {
+                      ...exp,
+                      problems: exp.problems.map((prob, probIndex) => {
+                        if(probIndex === props.probId) {
+                          return {
+                            ...prob,
+                            src: {
+                              ...prob.src,
+                              output: updatedOutput
+                            }
+                          }
+                        }
+                        return prob;
+                      })
+                    }
+                  }
+                  return exp;
+                })
+              }
+            }
+            return cycle;
+          })
+        }
+      }
+    });
+  }
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     multiple: true,
@@ -123,7 +194,13 @@ function MyDropzone({ props } : { props: MyDropzoneProps }) {
               >
                 <IoIosClose
                   color="red"
-                  className="min-w-[18px] min-h-[18px] hover:cursor-pointer transition-all duration-300 hover:scale-110"
+                  className="min-w-[18px] min-h-[18px] hover:cursor-pointer transition-all duration-300 bg-slate-200 rounded-md"
+                  onClick = {
+                    () => {
+                      setImageNametoDelete(imageName)
+                      setShowImageDeleteConfirm(true)
+                    }
+                  }
                 />
               </div>
             );
@@ -131,6 +208,34 @@ function MyDropzone({ props } : { props: MyDropzoneProps }) {
           return null;
         })}
       </div>
+      <AnimatePresence>
+        {showImageDeleteConfirm && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{duration: 0.3}}
+            key = {0}
+          >
+            <Confirm
+              message="Are you sure you want to delete this image? (cannot be undone)"
+              onConfirm={
+                () => {
+                  DeleteImage({imageName: imageNametoDelete});
+                  setImageNametoDelete('');
+                  setShowImageDeleteConfirm(false);
+                }
+              }
+              onCancel={
+                () => {
+                  setImageNametoDelete('');
+                  setShowImageDeleteConfirm(false);
+                }
+              } 
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
