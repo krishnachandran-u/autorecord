@@ -36,7 +36,7 @@ const Options = () => {
     }
 
     return (
-        <div className = "lg:w-fit w-full p-[24px] rounded-xl bg-black text-white gap-[24px] flex flex-col h-fit">
+        <div className = "lg:w-fit w-full rounded-xl gap-[24px] flex flex-col h-fit">
           {/*
             <div className = "flex flex-row items-center gap-[32px] justify-between">
               <div className = "whitespace-nowrap">project code: {record.code}</div>
@@ -45,11 +45,14 @@ const Options = () => {
               <div className = "whitespace-nowrap">project name: {record.name}</div>
             </div>
           */}
-            <div>
+            <div
+              className = "gap-[8px] flex flex-col"
+            >
               <div className = "w-full bg-slate-200 text-black rounded-lg p-[8px]">
                 <div className = {`${ubuntuMono.className} pl-[4px]`} >{record.code}</div>
-                <input 
-                  className = "text-2xl rounded-md p-[4px]"
+              </div>
+              <input 
+                  className = "w-full text-black rounded-lg p-[8px] border-2 border-slate-400 font-semibold"
                   value={record.name}
                   onChange={
                     (e) => {
@@ -57,25 +60,24 @@ const Options = () => {
                     }
                   }
                 />
-              </div>
             </div>
-            <div className = "flex flex-row items-center gap-[32px] justify-between">
+            <div className = "flex flex-row items-center gap-[32px] justify-between font-semibold">
               <div className = "whitespace-nowrap">enforce <span className = "font-serif text-[14px] font-bold">Times New Roman</span> </div>
-              <Switch className = "bg-blue-500"/>
+              <Switch className = ""/>
             </div>
-            <div className = "flex flex-row items-center gap-[32px] justify-between">
+            <div className = "flex flex-row items-center gap-[32px] justify-between font-semibold">
               <div className = "md:whitespace-nowrap">use <span className = {ubuntuMono.className} >monospace</span> font for code stubs</div>
               <Switch />
             </div>
             <div className = "flex flex-row justify-between items-center gap-[32px]">
               <button
-                className={buttonClassName}
+                className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white flex-1"
                 onClick={save}
               >
                 Save
               </button>
               <button 
-                className={buttonClassName}
+                className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white flex-1"
               >
                 Get PDF
               </button>

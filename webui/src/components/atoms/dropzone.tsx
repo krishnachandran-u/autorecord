@@ -169,7 +169,7 @@ function MyDropzone({ props } : { props: MyDropzoneProps }) {
     <div className="flex flex-col gap-[2px]">
       <div
         {...getRootProps()}
-        className='border-2 border-gray-300 border-dashed p-4 rounded-lg w-full flex justify-center items-center cursor-pointer h-[64px]]'
+        className='border-2 border-gray-300 border-dashed p-4 rounded-lg w-full flex justify-center items-center cursor-pointer h-[64px]] bg-white'
       >
         <input {...getInputProps() as React.InputHTMLAttributes<HTMLInputElement>} />
         {isDragActive ? (

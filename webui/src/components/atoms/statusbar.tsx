@@ -13,29 +13,33 @@ const StatusBar = () => {
     const [showLoadProject, setShowLoadProject] = useState(false);
 
     return (
-        <div className = "p-[24px] bg-black rounded-xl flex lg:flex-row flex-col justify-center sm:justify-normal items-center gap-[24px]">
+        <div className = "bg-white rounded-xl flex lg:flex-row flex-col justify-center sm:justify-normal items-center gap-[24px]">
            <div className = "flex flex-col gap-[24px] sm:flex-row w-full">
              <button 
-              className = "bg-white text-black p-[12px] rounded-lg border-2 border-white hover:bg-black hover:text-white transition-all duration-300 w-full sm:w-auto"
+              className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white"
               onClick={() => setShowNewProject(true)}
             >
-               create new project
+               Create new project
              </button>
              <button 
-              className = "bg-black border-2 border-white text-white p-[12px] rounded-lg hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto"
+              className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white"
               onClick = {() => setShowLoadProject(true)}
             >
-               load existing project
+               Load existing project
              </button>
            </div>
            <div className = "flex flex-col gap-[24px] sm:flex-row w-full lg:justify-end justify-start items-center">
-             <button className = "bg-black border-2 border-white text-white p-[12px] rounded-lg hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto">
-               credits
+             <button 
+              className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white"
+             >
+               Credits
              </button>
              <Link href = "https://github.com/krishnachandran-u/autorecord" target="_blank" rel="noopener noreferrer" className = "w-full sm:w-auto">
-               <button className = "bg-black border-2 border-white text-white p-[12px] rounded-lg hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto flex flex-row justify-center items-center gap-[12px] group">
-                 <FaGithub className = "text-white group-hover:text-black transition-all duration-300" size="24px" />
-                 <div>github</div>
+               <button 
+                className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white group flex flex-row justify-center items-center gap-[12px]"
+                >
+                 <FaGithub className = "text-blue-600" size="24px" />
+                 <div>GitHub</div>
                </button>
              </Link>
            </div>

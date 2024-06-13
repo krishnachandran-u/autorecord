@@ -60,14 +60,14 @@ export default function Home() {
 
   return (
     <main className = "lg:p-[96px] md:p-[56px] py-[32px] px-[24px] flex flex-col size-full md:gap-[56px] gap-[40px] transition-all duration-300 h-full">
-      <div className = {`flex justify-center items-center lg:text-5xl text-3xl font-semibold ${sora.className}`}>
+      <div className = {`flex justify-center items-center lg:text-5xl text-3xl font-semibold text-blue-800 ${sora.className}`}>
         autorecord.
       </div>
       <div className = "flex flex-col md:gap-[40px] gap-[32px] h-full">
         <StatusBar /> 
         <div className = "flex lg:flex-row flex-col gap-[24px]">
           <Options /> 
-          <div className = {`border-slate-600 border-[3px] w-full rounded-xl min-h-[400px] flex justify-center overflow-x-hidden h-full ${record === null? "items-center" : ""}`}>
+          <div className = {`border-blue-400 border-[3px] w-full rounded-xl min-h-[400px] flex justify-center overflow-x-hidden h-full ${record === null? "items-center" : ""}`}>
             <Canvas />
           </div>
         </div>
