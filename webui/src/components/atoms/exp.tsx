@@ -216,6 +216,7 @@ const Exp = (
                                         <textarea
                                             key={index}
                                             className="w-full border-2 border-gray-300 rounded-md max-h-[300px] min-h-[64px] overflow-y-scroll"
+                                            value = {record.cycles[cycleId].experiments[id].src[key as fieldType]}
                                             onChange={(e) => {
                                                 editField(key as fieldType, e.target.value);
                                                 const textarea = e.target as HTMLTextAreaElement;
