@@ -37,9 +37,27 @@ const Options = () => {
 
     return (
         <div className = "lg:w-fit w-full p-[24px] rounded-xl bg-black text-white gap-[24px] flex flex-col h-fit">
+          {/*
             <div className = "flex flex-row items-center gap-[32px] justify-between">
-              <div className = "whitespace-nowrap">project name</div>
-              <Input type = "text" className = "bg-slate-200 text-black h-[32px]" />
+              <div className = "whitespace-nowrap">project code: {record.code}</div>
+            </div>
+            <div className = "flex flex-row items-center gap-[32px] justify-between">
+              <div className = "whitespace-nowrap">project name: {record.name}</div>
+            </div>
+          */}
+            <div>
+              <div className = "w-full bg-slate-200 text-black rounded-lg p-[8px]">
+                <div className = {`${ubuntuMono.className} pl-[4px]`} >{record.code}</div>
+                <input 
+                  className = "text-2xl rounded-md p-[4px]"
+                  value={record.name}
+                  onChange={
+                    (e) => {
+                      setRecord({...record, name: e.target.value});
+                    }
+                  }
+                />
+              </div>
             </div>
             <div className = "flex flex-row items-center gap-[32px] justify-between">
               <div className = "whitespace-nowrap">enforce <span className = "font-serif text-[14px] font-bold">Times New Roman</span> </div>

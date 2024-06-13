@@ -9,6 +9,8 @@ import { DummyProjectData } from "../constants/projectData";
 
 export const ProjectContext = createContext<{
     record: {
+        code: string;
+        name: string;
         cycles: {
             name: string;
             experiments: {
@@ -36,6 +38,8 @@ export const ProjectContext = createContext<{
         }[];
     };
     setRecord: React.Dispatch<React.SetStateAction<{
+        code: string;
+        name: string;
         cycles: {
             name: string;
             experiments: {
@@ -64,6 +68,8 @@ export const ProjectContext = createContext<{
     }>>; 
 }>({
     record: {
+        code: "",
+        name: "",
         cycles: [],
     },
     setRecord: () => {}
@@ -71,6 +77,8 @@ export const ProjectContext = createContext<{
 
 export const ProjectProvider = ({children}:{children: ReactNode}) => {
     const [record, setRecord] = useState({
+        code: "",
+        name: "",
         cycles: [] as {
             name: string;
             experiments: {
