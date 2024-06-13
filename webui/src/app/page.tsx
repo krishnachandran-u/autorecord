@@ -12,6 +12,7 @@ import Options from "@/components/atoms/options";
 import { DummyProjectData } from "@/constants/projectData";
 import { ImagesContext } from "@/contexts/imagesContext";
 import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { Sora } from "next/font/google";
 const sora = Sora({subsets: ["latin"], weight: ["600"]});
@@ -50,7 +51,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    load({ code: "binary-search" });
   }, []);
 
   useEffect(() => {
@@ -66,7 +66,19 @@ export default function Home() {
       <div className = "flex flex-col md:gap-[40px] gap-[32px] h-full">
         <StatusBar /> 
         <div className = "flex lg:flex-row flex-col gap-[24px]">
-          <Options /> 
+          <AnimatePresence>
+            {record.code !== "" && (
+                <motion.div
+                  initial = {{ opacity: 0, width: 0 }}
+                  animate = {{ opacity: 1, width: "auto" }}
+                  exit = {{ opacity: 0, width: 0}}
+                  transition = {{ duration: 0.3 }}
+                  key = {0}
+                >
+                  <Options /> 
+                </motion.div>
+            )}
+          </AnimatePresence>
           <div className = {`border-blue-400 border-[3px] w-full rounded-xl min-h-[400px] flex justify-center overflow-x-hidden h-full ${record === null? "items-center" : ""}`}>
             <Canvas />
           </div>

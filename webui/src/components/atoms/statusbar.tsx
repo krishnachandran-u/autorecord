@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import Link from "next/link"
 import { FaGithub } from "react-icons/fa"
 
@@ -7,10 +7,26 @@ import NewProject from "@/components/atoms/newProject"
 import LoadProject from "@/components/atoms/loadProject"
 import { motion, AnimatePresence } from "framer-motion"
 
+import { ProjectContext } from "@/contexts/projectContext"
+import { ImagesContext } from "@/contexts/imagesContext"
+
 const StatusBar = () => {
+
+    const { record, setRecord } = useContext(ProjectContext);
+    const { images, setImages } = useContext(ImagesContext);
 
     const [showNewProject, setShowNewProject] = useState(false);
     const [showLoadProject, setShowLoadProject] = useState(false);
+
+    const closeProject = () => {
+        setRecord({
+          code: "",
+          name: "",
+          cycles: []
+        });
+        setImages([]);
+        console.log("Project closed");
+    }
 
     return (
         <div className = "bg-white rounded-xl flex lg:flex-row flex-col justify-center sm:justify-normal items-center gap-[24px]">
@@ -20,13 +36,26 @@ const StatusBar = () => {
               onClick={() => setShowNewProject(true)}
             >
                Create new project
-             </button>
-             <button 
+            </button>
+            <button 
               className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white"
               onClick = {() => setShowLoadProject(true)}
             >
                Load existing project
-             </button>
+            </button>
+            {record.code &&(
+              <motion.button 
+                initial = {{ opacity: 0 }}
+                animate = {{ opacity: 1 }}
+                exit = {{ opacity: 0 }} 
+                transition={{ duration: 0.3 }}
+                key = {0}
+                className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white"
+                onClick = {closeProject}
+              >
+                Close project
+              </motion.button>
+            )}
            </div>
            <div className = "flex flex-col gap-[24px] sm:flex-row w-full lg:justify-end justify-start items-center">
              <button 
