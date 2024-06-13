@@ -92,6 +92,16 @@ const Prob = (
         });
     };
 
+    type fieldType = "aim" | "algorithm" | "program" | "result";
+
+    const editField = (field: fieldType, value: string) => {
+        setRecord(prevRecord => {
+           const updatedRecord = { ...prevRecord }; 
+           updatedRecord.cycles[cycleId].experiments[expId].problems[id].src[field] = value;
+           return updatedRecord; 
+        });
+    }
+
     return (
         <div className={`flex flex-col gap-[2px] pl-[32px]`}>
             <div className="flex flex-row gap-[4px] items-center">
@@ -158,7 +168,9 @@ const Prob = (
                                     <textarea
                                         key={index}
                                         className="w-full border-2 border-gray-300 rounded-md max-h-[300px] min-h-[64px] overflow-y-scroll"
+                                        value = {record.cycles[cycleId].experiments[expId].problems[id].src[key as fieldType]}
                                         onChange={(e) => {
+                                            editField(key as fieldType, e.target.value);
                                             const textarea = e.target as HTMLTextAreaElement;
                                             textarea.style.height = "auto";
                                             textarea.style.height = textarea.scrollHeight >= 200 ? '200px' : `${textarea.scrollHeight}px`;
