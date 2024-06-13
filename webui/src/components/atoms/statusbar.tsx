@@ -4,11 +4,13 @@ import Link from "next/link"
 import { FaGithub } from "react-icons/fa"
 
 import NewProject from "@/components/atoms/newProject"
+import LoadProject from "@/components/atoms/loadProject"
 import { motion, AnimatePresence } from "framer-motion"
 
 const StatusBar = () => {
 
-    const [showNewProject, setShowNewProject] = useState(false)
+    const [showNewProject, setShowNewProject] = useState(false);
+    const [showLoadProject, setShowLoadProject] = useState(false);
 
     return (
         <div className = "p-[24px] bg-black rounded-xl flex lg:flex-row flex-col justify-center sm:justify-normal items-center gap-[24px]">
@@ -19,7 +21,10 @@ const StatusBar = () => {
             >
                create new project
              </button>
-             <button className = "bg-black border-2 border-white text-white p-[12px] rounded-lg hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto">
+             <button 
+              className = "bg-black border-2 border-white text-white p-[12px] rounded-lg hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto"
+              onClick = {() => setShowLoadProject(true)}
+            >
                load existing project
              </button>
            </div>
@@ -46,6 +51,21 @@ const StatusBar = () => {
               >
                 <NewProject 
                   onCreate = {() => setShowNewProject(false)}
+                />
+              </motion.div>)}
+           </AnimatePresence>
+           <AnimatePresence>
+            {showLoadProject && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                key = {0}
+                className = "fixed"
+              >
+                <LoadProject 
+                  onLoad = {() => setShowLoadProject(false)}
                 />
               </motion.div>)}
            </AnimatePresence>

@@ -45,7 +45,7 @@ const NewProject = (
 
     return (
         <div className = "fixed w-screen h-screen flex justify-center items-center top-0 left-0 bg-opacity-50 bg-slate-800 p-[24px] z-[1]">
-            <div className = "max-w-[700px] w-full bg-white rounded-2xl p-[24px] sm:p-[32px] flex flex-col justify-between text-[18px] gap-[32px] transition-all duration-300">
+            <div className = "max-w-[700px] w-full bg-white rounded-[24px] p-[24px] sm:p-[32px] flex flex-col justify-between text-[18px] gap-[32px] transition-all duration-300">
                 <div className = "sm:text-[32px] text-[24px] font-semibold">Create new project</div> 
                 <div className = "flex flex-col gap-[24px]">
                     <div className="flex flex-col gap-[16px]">
@@ -104,7 +104,7 @@ const NewProject = (
                             }
                         }
                     >
-                        Cancel
+                        Go back
                     </button>
                 </div>
             </div>
