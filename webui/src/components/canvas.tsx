@@ -21,7 +21,7 @@ const Canvas = () => {
                 key = {index} />
             ))}
             {record.code === "" && (
-                <div className = "flex justify-center items-center h-full">
+                <div className = "flex justify-center items-center h-full text-center">
                     Create a new project or load an existing project to get started
                 </div>
             )}
