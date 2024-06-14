@@ -1,1 +1,1 @@
-This is where your latex output is created.
+The Latex template is adapted from [PA2 Projektarbeit FIW](https://www.overleaf.com/latex/templates/pa2-projektarbeit-fiw/bhhpcchvrwxt) by Daniel Gissibi.
