@@ -3,6 +3,9 @@ import { useState, useContext } from "react";
 import { ProjectContext } from "@/contexts/projectContext";
 import { ImagesContext } from "@/contexts/imagesContext";
 
+import { Ubuntu_Mono } from "next/font/google";
+const ubuntuMono = Ubuntu_Mono({subsets: ["latin"], weight: ["700"]});
+
 const NewProject = (
     {onCreate}: 
     {onCreate?: () => void}
@@ -63,7 +66,7 @@ const NewProject = (
                                 }
                             }
                             pattern="[a-z0-9-]+" 
-                            className="bg-slate-200 text-black h-[36px] rounded-lg p-[8px] max-w-[500px]"
+                            className={`bg-slate-200 text-black h-[36px] rounded-lg p-[8px] max-w-[500px] ${ubuntuMono.className}`}
                         />
                     </div> 
                     <div className="flex flex-col gap-[16px]">
@@ -79,7 +82,7 @@ const NewProject = (
                                     setProjectName(e.target.value);
                                 }
                             }
-                            className="bg-slate-200 text-black h-[36px] rounded-lg p-[8px] max-w-[500px]"
+                            className={`bg-slate-200 text-black h-[36px] rounded-lg p-[8px] max-w-[500px] ${ubuntuMono.className}`}
                         />
                     </div>
                 </div>

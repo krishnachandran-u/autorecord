@@ -6,6 +6,9 @@ import { LuMoveRight } from "react-icons/lu";
 import { ProjectContext } from '@/contexts/projectContext';
 import { ImagesContext } from '@/contexts/imagesContext';
 
+import { Ubuntu_Mono } from "next/font/google";
+const ubuntuMono = Ubuntu_Mono({subsets: ["latin"], weight: ["700"]});
+
 const LoadProject = (
     { onLoad } : { onLoad?: () => void }
 ) => {
@@ -66,7 +69,7 @@ const LoadProject = (
                 {projectList.map((projectCode) => (
                     <div
                         key = {projectCode}
-                        className = "flex flex-row justify-between"
+                        className = {`flex flex-row justify-between ${ubuntuMono.className}`}
                     >
                         <div>{projectCode}</div>
                         <div

@@ -52,7 +52,7 @@ const Options = () => {
                 <div className = {`${ubuntuMono.className} pl-[4px]`} >{record.code}</div>
               </div>
               <input 
-                  className = "w-full text-black rounded-lg p-[8px] border-2 border-slate-400 font-semibold"
+                  className = {`w-full text-black rounded-lg p-[8px] border-2 border-slate-400 font-semibold ${ubuntuMono.className}`}
                   value={record.name}
                   onChange={
                     (e) => {
@@ -61,13 +61,13 @@ const Options = () => {
                   }
                 />
             </div>
-            <div className = "flex flex-row items-center gap-[32px] justify-between font-semibold">
-              <div className = "whitespace-nowrap">enforce <span className = "font-serif text-[14px] font-bold">Times New Roman</span> </div>
-              <Switch className = ""/>
+            <div className = {`flex flex-row items-center gap-[32px] justify-between font-semibold ${ubuntuMono.className}`}>
+              <div className = "whitespace-nowrap">enforce Times New Roman</div>
+              <Switch className = "z-[-1]"/>
             </div>
-            <div className = "flex flex-row items-center gap-[32px] justify-between font-semibold">
-              <div className = "md:whitespace-nowrap">use <span className = {ubuntuMono.className} >monospace</span> font for code stubs</div>
-              <Switch />
+            <div className = {`flex flex-row items-center gap-[32px] justify-between font-semibold ${ubuntuMono.className}`}>
+              <div className = "md:whitespace-nowrap">use monospace font for code stubs</div>
+              <Switch className = "z-[-1]"/>
             </div>
             <div className = "flex flex-row justify-between items-center gap-[32px]">
               <button
