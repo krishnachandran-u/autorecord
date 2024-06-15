@@ -24,6 +24,8 @@ const StatusBar = () => {
           name: "",
           studentName: "",
           date: "",
+          enforceTimes: false,
+          monospace: true,
           cycles: []
         });
         setImages([]);

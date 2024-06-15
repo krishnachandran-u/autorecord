@@ -27,6 +27,8 @@ const NewProject = (
             name: name,
             studentName: studentName,
             date: date,
+            enforceTimes: false,
+            monospace: true,
             cycles: [
                 {
                     experiments: [

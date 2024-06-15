@@ -13,6 +13,8 @@ export const ProjectContext = createContext<{
         name: string;
         studentName: string;
         date: string;
+        enforceTimes: boolean;
+        monospace: boolean;
         cycles: {
             experiments: {
                 name: string;
@@ -43,6 +45,8 @@ export const ProjectContext = createContext<{
         name: string;
         studentName: string;
         date: string;
+        enforceTimes: boolean;
+        monospace: boolean;
         cycles: {
             experiments: {
                 name: string;
@@ -74,6 +78,8 @@ export const ProjectContext = createContext<{
         name: "",
         studentName: "",
         date: "",
+        enforceTimes: false,
+        monospace: true,
         cycles: [],
     },
     setRecord: () => {}
@@ -85,6 +91,8 @@ export const ProjectProvider = ({children}:{children: ReactNode}) => {
         name: "",
         studentName: "",
         date: "",
+        enforceTimes: false,
+        monospace: true,
         cycles: [] as {
             experiments: {
                 name: string;

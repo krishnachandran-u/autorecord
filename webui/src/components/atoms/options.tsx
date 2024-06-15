@@ -72,11 +72,21 @@ const Options = () => {
             </div>
             <div className = {`flex flex-row items-center gap-[32px] justify-between font-semibold ${ubuntuMono.className}`}>
               <div className = "whitespace-nowrap">enforce Times New Roman</div>
-              <Switch className = "z-[-1]"/>
+              <input
+                type="checkbox"
+                checked={record.enforceTimes}
+                onChange={(e) => setRecord({ ...record, enforceTimes: e.target.checked })}
+                className="size-[20px]"
+              />
             </div>
             <div className = {`flex flex-row items-center gap-[32px] justify-between font-semibold ${ubuntuMono.className}`}>
               <div className = "md:whitespace-nowrap">use monospace font for code stubs</div>
-              <Switch className = "z-[-1]"/>
+              <input
+                type="checkbox"
+                checked={record.monospace}
+                onChange={(e) => setRecord({ ...record, monospace: e.target.checked })}
+                className="size-[20px]"
+              />
             </div>
             <div className = "flex flex-row justify-between items-center gap-[32px]">
               <button
