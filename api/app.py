@@ -54,6 +54,21 @@ def download_project(code):
                 if os.path.isfile(file_path):
                     copy(file_path, dir)
 
+        json_file = f"{app.config['SAVE_DIR']}/{code}/{code}.json"
+        with open(json_file, 'r') as f:
+            json_data = json.load(f)
+        
+        latex_file = f"{dir}/main.tex"
+        with open(latex_file, 'r') as f:
+            latex_content = f.read()
+        
+        latex_content = latex_content.replace('subjectName', json_data['name'])
+        latex_content = latex_content.replace('studentName', json_data['studentName'])
+        latex_content = latex_content.replace('submissionDate', json_data['date'])
+        
+        with open(latex_file, 'w') as f:
+            f.write(latex_content)
+
         return 'OK'
 
     except Exception as e:
