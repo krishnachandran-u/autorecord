@@ -33,11 +33,10 @@ const Cycle = (
         setRecord(prevRecord => {
             const updatedCycles = [...prevRecord.cycles];
             updatedCycles.push({
-                name: `Cycle ${updatedCycles.length + 1}`,
                 experiments: [
                     {
                         name: "Experiment 3",
-                        date: "dd-mm-yyyy",
+                        date: "",
                         hasSubProblems: false,
                         src: {
                             aim: "Aim",

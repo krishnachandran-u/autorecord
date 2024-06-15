@@ -11,8 +11,9 @@ export const ProjectContext = createContext<{
     record: {
         code: string;
         name: string;
+        studentName: string;
+        date: string;
         cycles: {
-            name: string;
             experiments: {
                 name: string;
                 date: string;
@@ -40,8 +41,9 @@ export const ProjectContext = createContext<{
     setRecord: React.Dispatch<React.SetStateAction<{
         code: string;
         name: string;
+        studentName: string;
+        date: string;
         cycles: {
-            name: string;
             experiments: {
                 name: string;
                 date: string;
@@ -70,6 +72,8 @@ export const ProjectContext = createContext<{
     record: {
         code: "",
         name: "",
+        studentName: "",
+        date: "",
         cycles: [],
     },
     setRecord: () => {}
@@ -79,8 +83,9 @@ export const ProjectProvider = ({children}:{children: ReactNode}) => {
     const [record, setRecord] = useState({
         code: "",
         name: "",
+        studentName: "",
+        date: "",
         cycles: [] as {
-            name: string;
             experiments: {
                 name: string;
                 date: string;

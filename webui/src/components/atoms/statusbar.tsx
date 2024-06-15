@@ -22,6 +22,8 @@ const StatusBar = () => {
         setRecord({
           code: "",
           name: "",
+          studentName: "",
+          date: "",
           cycles: []
         });
         setImages([]);
