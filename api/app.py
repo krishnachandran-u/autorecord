@@ -162,6 +162,14 @@ def download_project(code):
     except Exception as e:
         return str(e)
 
+@app.route('/api/clean', methods=['DELETE'])
+def clean_temp():
+    try:
+        rmtree(app.config['TEMP_DIR'])
+        return 'OK'
+    except Exception as e:
+        return str(e)
+
 @app.route('/api/load/<code>', methods=['GET'])
 def load_project(code):
     try:
