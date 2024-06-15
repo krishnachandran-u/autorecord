@@ -1,14 +1,20 @@
 from flask import Flask, request, send_file
 from flask_cors import CORS
 import os
-from shutil import rmtree
+from shutil import rmtree, copytree, copy
 import json
 import base64
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
+
 save_dir = './../.appdata/'
+temp_dir = './../.temp/'
+template_dir = './../template/'
+
 app.config['SAVE_DIR'] = save_dir
+app.config['TEMP_DIR'] = temp_dir
+app.config['TEMPLATE_DIR'] = template_dir
 
 @app.route('/api/save', methods=['POST'])
 def save_project():
@@ -31,6 +37,25 @@ def save_project():
             image.save(image_path)
 
         return 'OK'
+    except Exception as e:
+        return str(e)
+
+@app.route('/api/download/<code>', methods=['GET'])
+def download_project(code):
+    try:
+        if not os.path.exists(f"{app.config['SAVE_DIR']}/{code}"):
+            return 'Project not found'
+
+        dir = f"{app.config['TEMP_DIR']}/{code}" 
+        copytree(app.config['TEMPLATE_DIR'], dir)
+        for file in os.listdir(f"{app.config['SAVE_DIR']}/{code}"):
+            if not file.endswith('.json'):
+                file_path = os.path.join(f"{app.config['SAVE_DIR']}/{code}", file)
+                if os.path.isfile(file_path):
+                    copy(file_path, dir)
+
+        return 'OK'
+
     except Exception as e:
         return str(e)
 

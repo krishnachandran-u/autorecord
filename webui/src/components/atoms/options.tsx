@@ -35,6 +35,15 @@ const Options = () => {
       }
     }
 
+    const download = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/download/${record.code}`);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     return (
         <div className = "lg:w-fit w-full rounded-xl gap-[24px] flex flex-col h-fit">
           {/*
@@ -72,12 +81,13 @@ const Options = () => {
             <div className = "flex flex-row justify-between items-center gap-[32px]">
               <button
                 className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white flex-1"
-                onClick={save}
+                onClick = {save}
               >
                 Save
               </button>
               <button 
                 className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white flex-1"
+                onClick = {download}
               >
                 Get PDF
               </button>
