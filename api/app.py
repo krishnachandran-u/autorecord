@@ -1,7 +1,7 @@
 from flask import Flask, request, send_file
 from flask_cors import CORS
 import os
-from shutil import rmtree, copytree, copy
+from shutil import rmtree, copytree, copy, make_archive
 import json
 import base64
 import datetime
@@ -92,72 +92,85 @@ def download_project(code):
 
                     if(exp['hasSubProblems'] == True):
                         for probId, prob in enumerate(exp['problems']):
-                            f.write(
-                                f"\\section{{{prob['name']}}}\n"
-                                f"\\subsection{{Aim}}"
-                                f"{prob['src']['aim']}\n"
-                            )
+                            f.write(f"\\section{{{prob['name']}}}\n")
+                            if prob['src']['aim'] != "":
+                                f.write(
+                                    f"\\subsection{{Aim}}"
+                                    f"{prob['src']['aim']}\n"
+                                )
 
+                            if prob['src']['algorithm'] != "":
+                                f.write(f"\\subsection{{Algorithm}}")
+                                f.write(f"\\begin{{enumerate}}\n")
+                                algorithm_components = [component.strip("0123456789.- ").strip() for component in str(prob['src']['algorithm']).split('\n') if component.strip("0123456789.- ").strip()]
+                                for component in algorithm_components:
+                                    f.write(f"\\item {component}\n")
+                                f.write(f"\\end{{enumerate}}\n")
+                            
+                            if prob['src']['program'] != "":
+                                f.write(f"\\subsection{{Program}}\n")
+                                if(json_data['monospace']): f.write(f"\\begin{{verbatim}}\n")
+                                f.write(f"{prob['src']['program']}\n")
+                                if(json_data['monospace']): f.write(f"\\end{{verbatim}}\n")
+
+                            if prob['src']['output']:
+                                f.write(f"\\subsection{{Output}}\n")
+                                for output in prob['src']['output']:
+                                    f.write(
+                                        f"\\begin{{figure}}[H]\n"
+                                        f"\\centering\n"
+                                        f"\\includegraphics[width=0.60\linewidth]{{./{output}}}\n"
+                                        f"\\end{{figure}}\n"
+                                    )
+
+                            if prob['src']['result'] != "":
+                                f.write(
+                                    f"\\subsection{{Result}}\n"
+                                    f"{prob['src']['result']}\n"
+                                )
+                    else:
+                        f.write(f"\\section{{{exp['name']}}}\n")
+                        if exp['src']['aim'] != "":
+                            f.write(
+                                f"\\subsection{{Aim}}"
+                                f"{exp['src']['aim']}\n"
+                            )
+    
+                        if exp['src']['algorithm'] != "":
                             f.write(f"\\subsection{{Algorithm}}")
                             f.write(f"\\begin{{enumerate}}\n")
-                            algorithm_components = [component.strip("0123456789.- ").strip() for component in str(prob['src']['algorithm']).split('\n') if component.strip("0123456789.- ").strip()]
+                            algorithm_components = [component.strip("0123456789.- ").strip() for component in str(exp['src']['algorithm']).split('\n') if component.strip("0123456789.- ").strip()]
                             for component in algorithm_components:
                                 f.write(f"\\item {component}\n")
                             f.write(f"\\end{{enumerate}}\n")
-
-                            f.write("\\subsection{{Program}}\n")
-                            if(json_data['monospace']): f.write("\\begin{{verbatim}}\n")
-                            f.write(f"{prob['src']['program']}\n")
-                            if(json_data['monospace']): f.write("\\end{{verbatim}}\n")
-
+    
+                        if exp['src']['program'] != "":
+                            f.write(f"\\subsection{{Program}}\n")
+                            if(json_data['monospace']): f.write(f"\\begin{{verbatim}}\n")
+                            f.write(f"{exp['src']['program']}\n")
+                            if(json_data['monospace']): f.write(f"\\end{{verbatim}}\n")
+    
+                        if exp['src']['output']:
                             f.write(f"\\subsection{{Output}}\n")
-                            for output in prob['src']['output']:
+                            for output in exp['src']['output']:
                                 f.write(
                                     f"\\begin{{figure}}[H]\n"
                                     f"\\centering\n"
-                                    f"\\includegraphics[width=0.75\linewidth]{{./{output}}}\n"
+                                    f"\\includegraphics[width=0.60\linewidth]{{./{output}}}\n"
                                     f"\\end{{figure}}\n"
                                 )
-
+    
+                        if exp['src']['result'] != "":
                             f.write(
                                 f"\\subsection{{Result}}\n"
-                                f"{prob['src']['result']}\n"
+                                f"{exp['src']['result']}\n"
                             )
-                    else:
-                        f.write(
-                            f"\\section{{{exp['name']}}}\n"
-                            f"\\subsection{{Aim}}"
-                            f"{exp['src']['aim']}\n"
-                        )
-    
-                        f.write(f"\\subsection{{Algorithm}}")
-                        f.write(f"\\begin{{enumerate}}\n")
-                        algorithm_components = [component.strip("0123456789.- ").strip() for component in str(exp['src']['algorithm']).split('\n') if component.strip("0123456789.- ").strip()]
-                        for component in algorithm_components:
-                            f.write(f"\\item {component}\n")
-                        f.write(f"\\end{{enumerate}}\n")
-    
-                        f.write("\\subsection{{Program}}\n")
-                        if(json_data['monospace']): f.write("\\begin{{verbatim}}\n")
-                        f.write(f"{exp['src']['program']}\n")
-                        if(json_data['monospace']): f.write("\\end{{verbatim}}\n")
-    
-                        f.write(f"\\subsection{{Output}}\n")
-                        for output in exp['src']['output']:
-                            f.write(
-                                f"\\begin{{figure}}[H]\n"
-                                f"\\centering\n"
-                                f"\\includegraphics[width=0.75\linewidth]{{./{output}}}\n"
-                                f"\\end{{figure}}\n"
-                            )
-    
-                        f.write(
-                            f"\\subsection{{Result}}\n"
-                            f"{exp['src']['result']}\n"
-                        )
-                    
-        return 'OK'
+            f.write(f"\\end{{document}}")
+       
+        zip_file = f"{app.config['TEMP_DIR']}/{code}"
+        make_archive(zip_file, 'zip', f"{app.config['TEMP_DIR']}/{code}")
 
+        return send_file(f"{zip_file}.zip", as_attachment=True)
 
     except Exception as e:
         return str(e)
