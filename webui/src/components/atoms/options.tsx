@@ -62,13 +62,35 @@ const Options = () => {
               </div>
               <input 
                   className = {`w-full text-black rounded-lg p-[8px] border-2 border-slate-400 font-semibold ${ubuntuMono.className}`}
+                  placeholder="Project Name"
                   value={record.name}
                   onChange={
                     (e) => {
                       setRecord({...record, name: e.target.value});
                     }
                   }
-                />
+              />
+              <input 
+                  className = {`w-full text-black rounded-lg p-[8px] border-2 border-slate-400 font-semibold ${ubuntuMono.className}`}
+                  placeholder="Student Name"
+                  value={record.studentName}
+                  onChange={
+                    (e) => {
+                      setRecord({...record, studentName: e.target.value});
+                    }
+                  }
+              />
+              <input 
+                  type = "date"
+                  className = {`w-full text-black rounded-lg p-[8px] border-2 border-slate-400 font-semibold ${ubuntuMono.className}`}
+                  placeholder="Project Name"
+                  value={record.date}
+                  onChange={
+                    (e) => {
+                      setRecord({...record, date: e.target.value});
+                    }
+                  }
+              />
             </div>
             <div className = {`flex flex-row items-center gap-[32px] justify-between font-semibold ${ubuntuMono.className}`}>
               <div className = "whitespace-nowrap">enforce Times New Roman</div>
