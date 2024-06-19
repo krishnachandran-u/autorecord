@@ -35,14 +35,27 @@ const Options = () => {
       }
     }
 
-    const download = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/api/download/${record.code}`);
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
+
+  const download = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/download/${record.code}`, {
+        responseType: 'blob'
+      });
+  
+      const blob = new Blob([response.data], { type: 'application/octet-stream' }); 
+  
+      const fileName = `${record.code}.zip`; 
+  
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = fileName;
+      link.click();
+  
+      window.URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.error('Download error:', error);
     }
+  }; 
 
     return (
         <div className = "lg:w-fit w-full rounded-xl gap-[24px] flex flex-col h-fit">

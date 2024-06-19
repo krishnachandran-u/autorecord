@@ -169,7 +169,7 @@ def download_project(code):
        
         zip_file = f"{app.config['TEMP_DIR']}/{code}"
         make_archive(zip_file, 'zip', f"{app.config['TEMP_DIR']}/{code}")
-
+        
         return send_file(f"{zip_file}.zip", as_attachment=True)
 
     except Exception as e:
