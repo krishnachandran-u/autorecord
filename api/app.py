@@ -47,7 +47,9 @@ def download_project(code):
         if not os.path.exists(f"{app.config['SAVE_DIR']}/{code}"):
             return 'Project not found'
 
-        dir = f"{app.config['TEMP_DIR']}/{code}" 
+        dir = f"{app.config['TEMP_DIR']}/{code}"
+        if os.path.exists(dir):
+            rmtree(dir)
         copytree(app.config['TEMPLATE_DIR'], dir)
         for file in os.listdir(f"{app.config['SAVE_DIR']}/{code}"):
             if not file.endswith('.json'):

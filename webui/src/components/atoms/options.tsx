@@ -52,21 +52,14 @@ const Options = () => {
       link.click();
   
       window.URL.revokeObjectURL(link.href);
+
     } catch (error) {
       console.error('Download error:', error);
     }
   }; 
 
-    return (
+  return (
         <div className = "lg:w-fit w-full rounded-xl gap-[24px] flex flex-col h-fit">
-          {/*
-            <div className = "flex flex-row items-center gap-[32px] justify-between">
-              <div className = "whitespace-nowrap">project code: {record.code}</div>
-            </div>
-            <div className = "flex flex-row items-center gap-[32px] justify-between">
-              <div className = "whitespace-nowrap">project name: {record.name}</div>
-            </div>
-          */}
             <div
               className = "gap-[8px] flex flex-col"
             >
