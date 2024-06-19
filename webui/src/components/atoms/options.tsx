@@ -1,5 +1,7 @@
 import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
+import { useToast } from "../ui/use-toast";
+
 import axios from "axios";
 
 import { useContext } from "react";
@@ -14,6 +16,8 @@ const buttonClassName = "flex-1 bg-white p-[8px] border-white border-2 text-blac
 const Options = () => {
     const { record, setRecord } = useContext(ProjectContext);
     const { images, setImages } = useContext(ImagesContext);
+
+    const { toast } = useToast();
 
     const save = async () => {
       try {
@@ -119,7 +123,13 @@ const Options = () => {
             <div className = "flex flex-row justify-between items-center gap-[32px]">
               <button
                 className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white flex-1"
-                onClick = {save}
+                onClick = {() => {
+                  save();
+                  toast({
+                    title: "Project saved",
+                    description: "Your project has been saved successfully",
+                  });
+                }}
               >
                 Save
               </button>

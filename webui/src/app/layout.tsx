@@ -3,6 +3,7 @@ import { Urbanist } from "next/font/google";
 import "./globals.css";
 import { ProjectProvider } from "@/contexts/projectContext";
 import { ImagesProvider } from "@/contexts/imagesContext";
+import { Toaster } from "@/components/ui/toaster"
 
 const font = Urbanist({subsets: ["latin"]}); 
 
@@ -21,7 +22,12 @@ export default function RootLayout({
     <html lang="en">
       <ProjectProvider>
         <ImagesProvider>
-          <body className={font.className}>{children}</body>
+          <body className={font.className}>
+            <main>
+              {children}
+            </main>
+            <Toaster />
+          </body>
         </ImagesProvider>
       </ProjectProvider>
     </html>
