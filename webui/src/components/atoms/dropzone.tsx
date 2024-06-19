@@ -163,6 +163,11 @@ function MyDropzone({ props } : { props: MyDropzoneProps }) {
     onDragEnter: () => {},
     onDragOver: () => {},
     onDragLeave: () => {},
+    accept: {
+      'image/png': [],
+      'image/jpeg': [],
+      'image/jpg': []
+    }
   });
 
   return (
