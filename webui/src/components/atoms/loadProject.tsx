@@ -5,6 +5,11 @@ import { FaArrowRight } from 'react-icons/fa';
 import { LuMoveRight } from "react-icons/lu";
 import { ProjectContext } from '@/contexts/projectContext';
 import { ImagesContext } from '@/contexts/imagesContext';
+import { FaTrashAlt } from "react-icons/fa";
+import { useToast } from "../ui/use-toast";
+import { FaTrash } from "react-icons/fa";
+import Confirm from './confirm';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import { Ubuntu_Mono } from "next/font/google";
 const ubuntuMono = Ubuntu_Mono({subsets: ["latin"], weight: ["700"]});
@@ -14,6 +19,11 @@ const LoadProject = (
 ) => {
     const { record, setRecord } = useContext(ProjectContext);
     const { images, setImages } = useContext(ImagesContext);
+
+    const [showProjectDeleteConfirm, setShowProjectDeleteConfirm] = useState(false);
+    const [projectToDelete, setProjectToDelete] = useState('');
+
+    const { toast } = useToast();
 
     const [projectList, setProjectList] = useState([]);
 
@@ -46,6 +56,10 @@ const LoadProject = (
           });
           
           setImages(imageFiles);
+        toast({
+            title: "Project loaded",
+            description: `Project ${code} loaded successfully`,
+        })
         } else {
           console.error('Failed to load data');
         }
@@ -53,6 +67,21 @@ const LoadProject = (
         console.error('Error loading data:', error);
       }
     };
+
+    const deleteProject = async ({ code }: { code: string }) => {
+        try {
+            const response = await axios.delete(`http://localhost:5000/api/delete/${code}`);
+            if (response.status === 200) {
+                toast({
+                    title: "Project deleted",
+                    description: `Project ${code} deleted successfully`
+                });
+                fetchData();
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     useEffect(() => {
         fetchData();
@@ -72,17 +101,58 @@ const LoadProject = (
                         className = {`flex flex-row justify-between ${ubuntuMono.className}`}
                     >
                         <div>{projectCode}</div>
-                        <div
-                            className = "p-[4px] hover:bg-slate-200 rounded-md transition-all duration-300"
-                        >
-                            <LuMoveRight
-                                size = "24px"
-                                onClick = {() => {
-                                    load({ code: projectCode });
-                                    if (onLoad) onLoad();
-                                }}
-                                className = "cursor-pointer text-blue-600 transition-all duration-300 hover:text-blue-800 "
-                            />
+                        <div className = "flex flex-row gap-[4px]">
+                            <div
+                                className = "p-[4px] hover:bg-slate-200 rounded-md transition-all duration-300 flex flex-row gap-[8px] justify-center items-center"
+                            >
+                                <FaTrash
+                                    size = "18px"
+                                    className = "cursor-pointer text-slate-600 hover:text-slate-800 transition-all duration-300 "
+                                    onClick={() => {
+                                        setShowProjectDeleteConfirm(true);
+                                        setProjectToDelete(projectCode);
+                                    }}
+                                />
+                                
+                            </div>
+                            <div
+                                className = "p-[4px] hover:bg-slate-200 rounded-md transition-all duration-300 flex flex-row gap-[8px]"
+                            >
+                                <LuMoveRight
+                                    size = "24px"
+                                    onClick = {() => {
+                                        load({ code: projectCode });
+                                        if (onLoad) onLoad();
+                                    }}
+                                    className = "cursor-pointer text-blue-600 transition-all duration-300 hover:text-blue-800 "
+                                />
+                            </div>
+                            <AnimatePresence>
+                                {showProjectDeleteConfirm && (
+                                    <motion.div
+                                        initial = {{ opacity: 0 }}
+                                        animate = {{ opacity: 1 }}
+                                        exit = {{ opacity: 0 }}
+                                        transition = {{ duration: 0.3 }}
+                                        key = {0}
+                                        className = "fixed"
+                                    >
+                                        <Confirm
+                                            message = {`Are you sure you want to delete '${projectCode}'`}
+                                            onConfirm={() =>{
+                                                deleteProject({ code: projectToDelete });
+                                                setProjectToDelete('');
+                                                setShowProjectDeleteConfirm(false);
+                                            }}
+                                            onCancel={() => {
+                                                console.log(projectToDelete)
+                                                setProjectToDelete('');
+                                                setShowProjectDeleteConfirm(false);
+                                            }}
+                                        />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
                     </div>
                 ))}
@@ -96,7 +166,7 @@ const LoadProject = (
                         }
                     >
                         Go back
-                    </button>
+            </button>
            </div>
         </div>
     )

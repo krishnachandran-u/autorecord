@@ -2,6 +2,7 @@
 import { useState, useContext } from "react";
 import { ProjectContext } from "@/contexts/projectContext";
 import { ImagesContext } from "@/contexts/imagesContext";
+import { useToast } from "../ui/use-toast";
 
 import { Ubuntu_Mono } from "next/font/google";
 const ubuntuMono = Ubuntu_Mono({subsets: ["latin"], weight: ["700"]});
@@ -12,6 +13,8 @@ const NewProject = (
 ) => {
     const { record, setRecord } = useContext(ProjectContext);
     const { images, setImages } = useContext(ImagesContext);
+
+    const { toast } = useToast();
 
     const [projectCode, setProjectCode] = useState("");
     const [projectName, setProjectName] = useState("");
@@ -33,15 +36,15 @@ const NewProject = (
                 {
                     experiments: [
                         {
-                            name: "Experiment 1",
+                            name: "Experiment Name",
                             date: "",
                             hasSubProblems: false,
                             src: {
-                                aim: "Aim",
-                                algorithm: "Algorithm",
-                                program: "Program",
-                                output: ["sample1", "sample2"],
-                                result: "Result"
+                                aim: "",
+                                algorithm: "",
+                                program: "",
+                                output: [""],
+                                result: ""
                             },
                             problems: []
                         }
@@ -52,7 +55,7 @@ const NewProject = (
     }
 
     return (
-        <div className = "fixed w-screen h-screen flex justify-center items-center top-0 left-0 bg-opacity-50 bg-slate-800 p-[24px] z-[20]">
+        <div className = "fixed w-screen h-screen flex justify-center items-center top-0 left-0 bg-opacity-50 bg-slate-800 p-[24px]">
             <div className = "max-w-[700px] w-full bg-white rounded-[24px] p-[24px] sm:p-[32px] flex flex-col justify-between text-[18px] gap-[32px] transition-all duration-300">
                 <div className = "sm:text-[32px] text-[24px] font-semibold">Create new project</div> 
                 <div className = {`flex flex-col gap-[24px] ${ubuntuMono.className}`}>
@@ -62,6 +65,7 @@ const NewProject = (
                             <input
                                 type="text"
                                 value={projectCode}
+                                maxLength={50}
                                 onChange = {
                                     (e) => {
                                         setProjectCode(e.target.value.replace(/[^a-z0-9-]/g, ''));
@@ -79,6 +83,7 @@ const NewProject = (
                             <input
                                 type="text"
                                 value={projectName}
+                                maxLength={50}
                                 onChange = {
                                     (e) => {
                                         setProjectName(e.target.value);
@@ -95,6 +100,7 @@ const NewProject = (
                             <input
                                 type="text"
                                 value={studentName}
+                                maxLength={50}
                                 onChange = {
                                     (e) => {
                                         setStudentName(e.target.value);
@@ -111,6 +117,7 @@ const NewProject = (
                             <input
                                 type="date"
                                 value={submitDate}
+                                maxLength={50}
                                 onChange = {
                                     (e) => {
                                         setSubmitDate(e.target.value);
@@ -128,7 +135,12 @@ const NewProject = (
                         className = "text-blue-600 font-bold p-[8px] hover:text-blue-800 transition-all duration-300"
                         onClick={() => {
                             if(projectCode !== "" && projectName !== "" && studentName !== "" && submitDate !== "") {
+                                init({code: projectCode, name: projectName, studentName: studentName, date: submitDate});
                                 setImages([]);
+                                toast({
+                                    title: "Project created",
+                                    description: "Project has been created successfully",
+                                })
                                 if (onCreate) onCreate();
                             }
                         }}

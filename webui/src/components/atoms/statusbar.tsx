@@ -2,6 +2,7 @@
 import { useState, useContext } from "react"
 import Link from "next/link"
 import { FaGithub } from "react-icons/fa"
+import { useToast } from "../ui/use-toast"
 
 import NewProject from "@/components/atoms/newProject"
 import LoadProject from "@/components/atoms/loadProject"
@@ -14,6 +15,8 @@ const StatusBar = () => {
 
     const { record, setRecord } = useContext(ProjectContext);
     const { images, setImages } = useContext(ImagesContext);
+
+    const { toast } = useToast();
 
     const [showNewProject, setShowNewProject] = useState(false);
     const [showLoadProject, setShowLoadProject] = useState(false);
@@ -55,7 +58,15 @@ const StatusBar = () => {
                 transition={{ duration: 0.3 }}
                 key = {0}
                 className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white"
-                onClick = {closeProject}
+                onClick = {
+                  () => {
+                    closeProject();
+                    toast({
+                      title: "Project closed",
+                      description: "The project has been closed",
+                    })
+                  }
+                }
               >
                 Close project
               </motion.button>
@@ -84,7 +95,7 @@ const StatusBar = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
                 key = {0}
-                className = "fixed"
+                className = "fixed z-[1]"
               >
                 <NewProject 
                   onCreate = {() => setShowNewProject(false)}
@@ -99,7 +110,7 @@ const StatusBar = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
                 key = {0}
-                className = "fixed"
+                className = "fixed z-[1]"
               >
                 <LoadProject 
                   onLoad = {() => setShowLoadProject(false)}

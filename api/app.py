@@ -220,6 +220,8 @@ def delete_json(code):
 
         if os.path.exists(dir):
             rmtree(dir)
+        
+        print(code)
 
         return 'OK'
     except Exception as e:

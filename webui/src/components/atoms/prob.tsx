@@ -7,7 +7,6 @@ import { ProjectContext } from "@/contexts/projectContext";
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
 import MyDropzone from "./dropzone";
-import TextInput from "./TextInput";
 import Confirm from "@/components/atoms/confirm";
 
 type ProbProps = {
@@ -97,7 +96,7 @@ const Prob = (
     const editField = (field: fieldType, value: string) => {
         setRecord(prevRecord => {
            const updatedRecord = { ...prevRecord }; 
-           updatedRecord.cycles[cycleId].experiments[expId].problems[id].src[field] = value;
+           updatedRecord.cycles[cycleId].experiments[expId].problems[id].src[field] = value.replace(/\n\s*\n/g, '\n');
            return updatedRecord; 
         });
     }
@@ -175,7 +174,7 @@ const Prob = (
                                             textarea.style.height = "auto";
                                             textarea.style.height = textarea.scrollHeight >= 200 ? '200px' : `${textarea.scrollHeight}px`;
                                         }}
-                                        placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+                                        placeholder={"[" + key.charAt(0).toUpperCase() + key.slice(1) + "]" + (key == "algorithm" ? "\n1. Start\n2. Here goes the next step\n3. Stop" : "")}
                                     />
                                 );
                             } else {

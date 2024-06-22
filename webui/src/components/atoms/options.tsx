@@ -1,5 +1,3 @@
-import { Switch } from "@/components/ui/switch";
-import { Input } from "@/components/ui/input";
 import { useToast } from "../ui/use-toast";
 
 import axios from "axios";
@@ -135,7 +133,15 @@ const Options = () => {
               </button>
               <button 
                 className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white flex-1"
-                onClick = {download}
+                onClick = {
+                  () => {
+                    download();
+                    toast({
+                      title: "PDF generated",
+                      description: "Your PDF has been generated successfully",
+                    })
+                  }
+                }
               >
                 Get PDF
               </button>

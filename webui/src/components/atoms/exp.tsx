@@ -45,11 +45,11 @@ const Exp = (
                 date: "dd-mm-yyyy",
                 hasSubProblems: false,
                 src: {
-                    aim: "Aim",
-                    algorithm: "Algorithm",
-                    program: "Program",
-                    output: ["sample1", "sample2"],
-                    result: "Result"
+                    aim: "",
+                    algorithm: "",
+                    program: "",
+                    output: [],
+                    result: ""
                 },
                 problems: []
             });
@@ -119,7 +119,7 @@ const Exp = (
     const editField = (field: fieldType, value: string) => {
         setRecord(prevRecord => {
             const updatedRecord = {...prevRecord};
-            updatedRecord.cycles[cycleId].experiments[id].src[field] = value;
+            updatedRecord.cycles[cycleId].experiments[id].src[field] = value.replace(/\n\s*\n/g, '\n');
             return updatedRecord;
         });
     }
@@ -223,7 +223,7 @@ const Exp = (
                                                 textarea.style.height = "auto";
                                                 textarea.style.height = textarea.scrollHeight >= 200 ? '200px' : `${textarea.scrollHeight}px`;
                                             }}
-                                            placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+                                            placeholder={"[" + key.charAt(0).toUpperCase() + key.slice(1) + "]" + (key == "algorithm" ? "\n1. Start\n2. Here goes the next step\n3. Stop" : "")}
                                         />
                                     );
                                 } else {
