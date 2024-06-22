@@ -137,13 +137,13 @@ const Options = () => {
                   () => {
                     download();
                     toast({
-                      title: "PDF generated",
-                      description: "Your PDF has been generated successfully",
+                      title: "ZIP generated",
+                      description: "Upload your zip at Overleaf",
                     })
                   }
                 }
               >
-                Get PDF
+                Get ZIP
               </button>
             </div>
         </div> 

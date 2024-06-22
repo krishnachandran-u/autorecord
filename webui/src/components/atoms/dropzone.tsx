@@ -178,9 +178,9 @@ function MyDropzone({ props } : { props: MyDropzoneProps }) {
       >
         <input {...getInputProps() as React.InputHTMLAttributes<HTMLInputElement>} />
         {isDragActive ? (
-          <p>Drop the files here ...</p>
+          <p>Drop the images here ...</p>
         ) : (
-          <p>Drag n drop some files here, or click to select files</p>
+          <p>Drag n drop some images here, or click to select images (.jpg, .jpeg, .png)</p>
         )}
       </div>
       <div className="flex flex-row gap-[2px]">

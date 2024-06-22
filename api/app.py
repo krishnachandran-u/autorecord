@@ -66,7 +66,9 @@ def download_project(code):
             latex_content = f.read()
 
         if json_data['enforceTimes']:
-            latex_content = "\\usepackage{times}\n" + latex_content
+            first_line, rest_of_content = latex_content.split("\n", 1)
+            new_latex_content = first_line + "\n\\usepackage{times}\n" + rest_of_content
+            latex_content = new_latex_content 
         
         latex_content = latex_content.replace('subjectName', json_data['name'])
         latex_content = latex_content.replace('studentName', json_data['studentName'])
@@ -112,8 +114,10 @@ def download_project(code):
                             if prob['src']['program'] != "":
                                 f.write(f"\\subsection{{Program}}\n")
                                 if(json_data['monospace']): f.write(f"\\begin{{verbatim}}\n")
+                                else: f.write("\\begin{{lstlisting}}")
                                 f.write(f"{prob['src']['program']}\n")
                                 if(json_data['monospace']): f.write(f"\\end{{verbatim}}\n")
+                                else: f.write("\\end{{lstlisting}}")
 
                             if prob['src']['output']:
                                 f.write(f"\\subsection{{Output}}\n")
@@ -149,8 +153,10 @@ def download_project(code):
                         if exp['src']['program'] != "":
                             f.write(f"\\subsection{{Program}}\n")
                             if(json_data['monospace']): f.write(f"\\begin{{verbatim}}\n")
+                            else: f.write("\\begin{{lstlisting}}")
                             f.write(f"{exp['src']['program']}\n")
                             if(json_data['monospace']): f.write(f"\\end{{verbatim}}\n")
+                            else: f.write("\\end{{lstlisting}}")
     
                         if exp['src']['output']:
                             f.write(f"\\subsection{{Output}}\n")
