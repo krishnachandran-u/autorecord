@@ -54,6 +54,12 @@ const NewProject = (
         }) 
     }
 
+    const isValidDate = ({dateString} : {dateString: string}) => {
+      const date = new Date(dateString);
+
+      return date.toString() !== 'Invalid Date' && date.toISOString().slice(0, 10) === dateString;
+    }
+    
     return (
         <div className = "fixed w-screen h-screen flex justify-center items-center top-0 left-0 bg-opacity-50 bg-slate-800 p-[24px]">
             <div className = "max-w-[700px] w-full bg-white rounded-[24px] p-[24px] sm:p-[32px] flex flex-col justify-between text-[18px] gap-[32px] transition-all duration-300">
@@ -134,7 +140,7 @@ const NewProject = (
                     <button 
                         className = "text-blue-600 font-bold p-[8px] hover:text-blue-800 transition-all duration-300"
                         onClick={() => {
-                            if(projectCode !== "" && projectName !== "" && studentName !== "" && submitDate !== "") {
+                            if(projectCode !== "" && projectName !== "" && studentName !== "" && isValidDate({dateString: submitDate})) {
                                 init({code: projectCode, name: projectName, studentName: studentName, date: submitDate});
                                 setImages([]);
                                 toast({

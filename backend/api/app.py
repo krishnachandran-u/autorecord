@@ -244,9 +244,12 @@ def delete_json(code):
 @app.route('/api/list', methods=['GET'])
 def list_json():
     try:
-        projects = os.listdir(app.config['SAVE_DIR'])
-        
-        return json.dumps(projects)
+        if os.path.exists(app.config['SAVE_DIR']):
+            projects = os.listdir(app.config['SAVE_DIR'])
+            return json.dumps(projects)
+        else: 
+            return json.dumps([])
+
     except Exception as e:
         return str(e)
 
