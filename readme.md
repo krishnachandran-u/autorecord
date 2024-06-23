@@ -1,7 +1,6 @@
-# autorecord
-## Generate beautiful lab records with a single click!
+# autorecord - Generate beautiful lab records with a single click!
 
-# Table of Contents
+## Table of Contents
   - [Generate lab records with a single click](#generate-lab-records-with-a-single-click)
   - [One-Time Setup for Autorecord](#one-time-setup-for-autorecord)
   - [Running Autorecord](#running-autorecord)
@@ -44,7 +43,7 @@ docker run -p 3000:3000 krishnachandranu/autorecord-frontend
 
 3. **All set!:** After the containers are running, open your web browser and go to [http://localhost:3000](http://localhost:3000).
 
-### Get Your Lab Report as PDF
+## Get Your Lab Report as PDF
 
 **Ready to download your lab report? Here's how:**
 
@@ -53,7 +52,7 @@ docker run -p 3000:3000 krishnachandranu/autorecord-frontend
 3. **Upload to Overleaf:**  If you don't have an [Overleaf (Click Here)](https://www.overleaf.com/) account, create one for free! Then, click `New Project` and choose `Upload` to select the downloaded ZIP file.
 4. **Get your PDF:** Overleaf will automatically set up your project. Finally, click the `Download PDF` button `(looks like a download icon)` on the top of the rendered PDF to save your lab report as a PDF!
 
-### Contribute
+## Contribute
 To contribute, follow these steps:
 
 1. Install Docker on your machine. You can download Docker from the official website: [https://www.docker.com/get-started](https://www.docker.com/get-started).
@@ -77,7 +76,7 @@ docker-compose up --build
 
 7. After the containers are built and running, open your web browser and go to [http://localhost:3000](http://localhost:3000).
 
-### Additional Directories
+## Additional Directories
 
 The project includes the following additional directories:
 
