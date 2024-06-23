@@ -1,6 +1,6 @@
 "use client"
 import React, { useCallback, useContext, useState } from 'react';
-import { useDropzone, DropzoneOptions } from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 import { IoIosClose } from "react-icons/io";
 import Confirm from '@/components/atoms/confirm';
 import { motion, AnimatePresence } from 'framer';

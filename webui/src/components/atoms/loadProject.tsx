@@ -1,11 +1,9 @@
 "use client"
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
-import { FaArrowRight } from 'react-icons/fa';
 import { LuMoveRight } from "react-icons/lu";
 import { ProjectContext } from '@/contexts/projectContext';
 import { ImagesContext } from '@/contexts/imagesContext';
-import { FaTrashAlt } from "react-icons/fa";
 import { useToast } from "../ui/use-toast";
 import { FaTrash } from "react-icons/fa";
 import Confirm from './confirm';

@@ -1,4 +1,3 @@
-import { IoIosClose } from 'react-icons/io';
 import { Urbanist } from 'next/font/google';
 
 const font = Urbanist({subsets: ['latin']});

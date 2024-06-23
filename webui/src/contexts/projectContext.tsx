@@ -1,11 +1,6 @@
 "use client"
 import { ReactNode, createContext } from "react";
 import { useState } from "react";
-import sample1 from "../../public/sample1.png"
-import sample2 from "../../public/sample2.png"
-import { useEffect } from "react";
-
-import { DummyProjectData } from "../constants/projectData";
 
 export const ProjectContext = createContext<{
     record: {

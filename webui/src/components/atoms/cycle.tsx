@@ -2,12 +2,11 @@
 
 import { FiPlus } from "react-icons/fi";
 import { FiMinus } from "react-icons/fi";
-import { use, useState } from "react";
-import { useEffect } from "react";
+import { useState } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-import { useContext, ChangeEvent } from "react";
+import { useContext } from "react";
 import { ProjectContext } from "@/contexts/projectContext";
 
 import { FaAngleDown } from "react-icons/fa";

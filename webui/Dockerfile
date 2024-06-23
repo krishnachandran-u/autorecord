@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000  
 
-CMD ["npm", "run", "dev"]  # Start Next.js development server
+CMD npm run build && npm run start
