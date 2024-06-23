@@ -15,7 +15,7 @@ This README provides documentation for the API endpoints of autorecord.
 
 **Endpoint:** `/api/save`
 **Method:** POST
-**Description:** Saves a project with JSON data and images.
+**Description:** Saves a record with JSON data and images.
 
 **Request:**
 - Form data:
@@ -30,7 +30,7 @@ This README provides documentation for the API endpoints of autorecord.
 
 **Endpoint:** `/api/download/<code>`
 **Method:** GET
-**Description:** Downloads a project as a ZIP file.
+**Description:** Downloads the [Overleaf](https://www.overleaf.com/) ZIP of the record.
 
 **Parameters:**
 - `code`: Project code
@@ -53,7 +53,7 @@ This README provides documentation for the API endpoints of autorecord.
 
 **Endpoint:** `/api/load/<code>`
 **Method:** GET
-**Description:** Loads a project's JSON data and images.
+**Description:** Loads a record's JSON data and images.
 
 **Parameters:**
 - `code`: Project code
@@ -103,4 +103,4 @@ This README provides documentation for the API endpoints of autorecord.
 - For POST requests, ensure you're sending the correct form data
 - Handle errors by checking if the response is an error message
 
-For more detailed information about request and response formats, please refer to the API implementation or contact the development team.
+For more detailed information about request and response formats, please refer to the API implementation or contact the developer.

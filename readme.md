@@ -18,11 +18,11 @@ To contribute, follow these steps:
 
 6. Run the following command to build and start the Docker containers:
 ```
-docker-compose up --build
+docker compose up --build
 ```
 if it doesn't work run
 ```
-docker compose up --build
+docker-compose up --build
 ```
 
 7. After the containers are built and running, open your web browser and go to [http://localhost:3000](http://localhost:3000).
