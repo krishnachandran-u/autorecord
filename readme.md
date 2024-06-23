@@ -1,4 +1,5 @@
-# autorecord - Generate beautiful lab records with a single click!
+# autorecord
+## Generate beautiful lab records with a single click!
 
 ## Table of Contents
   - [Generate lab records with a single click](#generate-lab-records-with-a-single-click)
