@@ -41,6 +41,13 @@ def save_project():
     except Exception as e:
         return str(e)
 
+def is_valid_date(date):
+    try:
+        datetime.datetime.strptime(date, '%Y-%m-%d')
+        return True
+    except ValueError:
+        return False
+
 @app.route('/api/download/<code>', methods=['GET'])
 def download_project(code):
     try:
@@ -84,7 +91,7 @@ def download_project(code):
                     f"\\addcontentsline{{toc}}{{part}}{{Cycle {cycleId + 1}}}\n"
                 )
                 for expId, exp in enumerate(cycle['experiments']):
-                    if(exp['date'] != "yyyy-mm-dd") or exp['date'] != "":
+                    if is_valid_date(exp['date']):
                         formatted_date = datetime.datetime.strptime(exp['date'], '%Y-%m-%d').strftime('%d %b %Y')
                         f.write(
                             f"\\ihead{{\\normalfont \\rightmark \\newline {formatted_date}}}\n"
@@ -178,6 +185,7 @@ def download_project(code):
         zip_file = f"{app.config['TEMP_DIR']}/{code}"
         make_archive(zip_file, 'zip', f"{app.config['TEMP_DIR']}/{code}")
         
+        print("successfully converted to zip")
         return send_file(f"{zip_file}.zip", as_attachment=True)
 
     except Exception as e:

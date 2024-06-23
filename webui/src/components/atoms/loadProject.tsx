@@ -23,9 +23,9 @@ const LoadProject = (
     const [showProjectDeleteConfirm, setShowProjectDeleteConfirm] = useState(false);
     const [projectToDelete, setProjectToDelete] = useState('');
 
-    const { toast } = useToast();
-
     const [projectList, setProjectList] = useState([]);
+
+    const { toast } = useToast();
 
     const fetchData = async () => {
         try {
@@ -95,7 +95,7 @@ const LoadProject = (
              <div className = "sm:text-[32px] text-[24px] font-semibold">Load project</div> 
              <div className = "flex flex-col gap-[8px] overflow-y-auto">
                 {projectList.length === 0 && <div>No projects found.<br /><span className = "text-blue-600">Create a new project</span> to continue</div>}
-                {projectList.map((projectCode) => (
+                {projectList.length > 0 && Array.isArray(projectList) && projectList.map((projectCode) => (
                     <div
                         key = {projectCode}
                         className = {`flex flex-row justify-between ${ubuntuMono.className}`}

@@ -1,8 +1,9 @@
 FROM node:20-alpine 
 
-WORKDIR /webui
+WORKDIR /
 
 COPY package*.json ./
+
 RUN npm install
 
 COPY . .
