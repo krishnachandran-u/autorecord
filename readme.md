@@ -1,47 +1,57 @@
 # autorecord
 ## Generate lab records with a single click
 
+# Table of Contents
+  - [Generate lab records with a single click](#generate-lab-records-with-a-single-click)
+  - [One-Time Setup for Autorecord](#one-time-setup-for-autorecord)
+  - [Running Autorecord](#running-autorecord)
+  - [Get Your Lab Report as PDF](#get-your-lab-report-as-pdf)
+  - [Contribute](#contribute)
+  - [Additional Directories](#additional-directories)
 
-### Table of Contents
-- [Installation](#installation)
-- [Run](#run)
-- [Contribute](#contribute)
-- [Additional Directories](#additional-directories)
+## One-Time Setup for Autorecord
 
-### Installation (only once)
+**Ready to use Autorecord? Here's a quick setup:**
 
-To install autorecord, follow these steps:
-
-1. Install Docker on your machine. You can download Docker from the official website: [https://www.docker.com/get-started](https://www.docker.com/get-started).
-
-2. Open a terminal or command prompt and run the following command to create a volume for autorecord app data:
+1. **Install Docker:** Head to the official website (https://docs.docker.com/guides/getting-started/) and download Docker for your system.
+2. **Create App Data Volume:** Open your terminal and run this command to create a storage area for autorecord's data:
 ```
 docker volume create autorecord-appdata
 ```
-
-3. Run the following commands to pull the backend and frontend images:
+3. **Pull Docker Images:** Run the following commands to pull the backend and frontend images:
 ```
 docker pull krishnachandranu/autorecord-backend
 ```
 ```
 docker pull krishnachandranu/autorecord-frontend
 ```
+**Tip:** These commands might take a while depending on your internet speed.
 
-### Run
+## Running Autorecord
 
-To run autorecord, follow these steps:
+**Ready to start recording? Here's how to launch Autorecord:**
 
-1. Open a terminal or command prompt and run the backend container with the following command:
+1. **Open a terminal:** Open your terminal or command prompt.
+2. **Run Backend:** In the terminal, run this command to start the backend of autorecord:
 ```
 docker run -v autorecord-appdata:/.appdata -p 5000:5000 krishnachandranu/autorecord-backend
 ```
-
-2. Open __another__ terminal or command prompt and run the frontend container with the following command:
+2. **Run Frontend:** Open **another** terminal or command prompt. In the terminal, run this command to start the frontend of autorecord:
 ```
 docker run -p 3000:3000 krishnachandranu/autorecord-frontend
 ```
+**Important:** Make sure to run these commands in separate terminals to ensure both parts of autorecord function correctly.
 
-3. After the containers are running, open your web browser and go to [http://localhost:3000](http://localhost:3000).
+3. **All set!:** After the containers are running, open your web browser and go to [http://localhost:3000](http://localhost:3000).
+
+### Get Your Lab Report as PDF
+
+**Ready to download your lab report? Here's how:**
+
+1. **Save your work:** Make sure all your edits are complete, then click `Save` in autorecord.
+2. **Download your files:** Click `Get ZIP` to create a compressed file containing everything for your report. 
+3. **Upload to Overleaf:**  If you don't have an [Overleaf (Click Here)](https://www.overleaf.com/) account, create one for free! Then, click `New Project` and choose `Upload` to select the downloaded ZIP file.
+4. **Get your PDF:** Overleaf will automatically set up your project. Finally, click the `Download PDF` button `(looks like a download icon)` on the top of the rendered PDF to save your lab report as a PDF!
 
 ### Contribute
 To contribute, follow these steps:
