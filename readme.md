@@ -8,6 +8,7 @@
   - [Get Your Lab Report as PDF](#get-your-lab-report-as-pdf)
   - [Contribute](#contribute)
   - [Additional Directories](#additional-directories)
+  - [Credits](#credits)
 
 ## One-Time Setup for autorecord
 
@@ -87,3 +88,20 @@ The project includes the following additional directories:
 - `/backend/api/readme.md` has the API documentation
 - `/backend/template` has the base LaTeX template  
 
+## Credits
+
+Special thanks to the following individuals for their direct and/or indirect contributions:
+
+- [Don Jose Mathew](https://github.com/donjosemathew)
+- [Jiya Rose Joshy](https://github.com/jiyarosejoshy)
+- [Meenakshy Sudhir](https://github.com/meenakshysudhir)
+- [Riya Sabu](https://github.com/riya461)
+- [Mohamed Irfan AM](https://github.com/MohamedIrfanAM)
+- [Nimmi M Giji](https://github.com/Nimmi-Giji)
+- [Aravind Suresh Thakidayil](https://github.com/AravindSureshThakidayil)
+- [Alex Sabu](https://github.com/AlexSabu)
+- Joshua T Joy
+- [Pranav Jayachandran](https://github.com/PranavJayachandran)
+- [Ajay Krishna K V](https://github.com/AJAYK-01)
+- [Arjun A I](https://github.com/Arjun-A-I)
+- Vishnu Shaji
