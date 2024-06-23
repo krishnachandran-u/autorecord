@@ -1,73 +1,106 @@
 # API Documentation
 
+This README provides documentation for the API endpoints of autorecord.
+
+## Table of Contents
+1. [Save Project](#save-project)
+2. [Download Project](#download-project)
+3. [Clean Temporary Files](#clean-temporary-files)
+4. [Load Project](#load-project)
+5. [Delete Project](#delete-project)
+6. [List Projects](#list-projects)
+7. [Health Check](#health-check)
+
 ## Save Project
 
 **Endpoint:** `/api/save`
 **Method:** POST
+**Description:** Saves a project with JSON data and images.
 
-Saves a project with the provided data and images.
+**Request:**
+- Form data:
+  - `json_data`: JSON string containing project details
+  - `images`: List of image files
 
-### Request Body
+**Response:**
+- Success: "OK"
+- Error: Error message
 
-- `json_data` (string): The JSON data of the project.
-- `images` (array of files): The images associated with the project.
+## Download Project
 
-### Response
+**Endpoint:** `/api/download/<code>`
+**Method:** GET
+**Description:** Downloads a project as a ZIP file.
 
-- `OK` (string): The project was saved successfully.
-- Error message (string): An error occurred while saving the project.
+**Parameters:**
+- `code`: Project code
+
+**Response:**
+- Success: ZIP file
+- Error: Error message or "Project not found"
+
+## Clean Temporary Files
+
+**Endpoint:** `/api/clean`
+**Method:** DELETE
+**Description:** Cleans temporary files.
+
+**Response:**
+- Success: "OK"
+- Error: Error message
 
 ## Load Project
 
 **Endpoint:** `/api/load/<code>`
 **Method:** GET
+**Description:** Loads a project's JSON data and images.
 
-Loads a project with the specified code.
+**Parameters:**
+- `code`: Project code
 
-### Path Parameters
-
-- `code` (string): The code of the project to load.
-
-### Response
-
-- JSON object: The loaded project data, including content and images.
-- Error message (string): An error occurred while loading the project.
+**Response:**
+- Success: JSON object containing:
+  - `json_data`: Project data
+  - `images`: List of base64-encoded images
+- Error: Error message
 
 ## Delete Project
 
 **Endpoint:** `/api/delete/<code>`
 **Method:** DELETE
+**Description:** Deletes a project.
 
-Deletes a project with the specified code.
+**Parameters:**
+- `code`: Project code
 
-### Path Parameters
-
-- `code` (string): The code of the project to delete.
-
-### Response
-
-- `OK` (string): The project was deleted successfully.
-- Error message (string): An error occurred while deleting the project.
+**Response:**
+- Success: "OK"
+- Error: Error message
 
 ## List Projects
 
 **Endpoint:** `/api/list`
 **Method:** GET
+**Description:** Lists all projects.
 
-Lists all the saved projects.
-
-### Response
-
-- JSON array: The list of saved projects.
-- Error message (string): An error occurred while listing the projects.
+**Response:**
+- Success: JSON array of project codes
+- Error: Error message
 
 ## Health Check
 
 **Endpoint:** `/api/health`
 **Method:** GET
+**Description:** Checks if the API is running.
 
-Checks the health of the API.
+**Response:**
+- "OK"
 
-### Response
+## Notes for Beginners
 
-- `OK` (string): The API is healthy.
+- All endpoints are prefixed with `/api/`
+- Replace `<code>` in URLs with the actual project code
+- For POST requests, ensure you're sending the correct form data
+- Handle errors by checking if the response is an error message
+
+For more detailed information about request and response formats, please refer to the API implementation or contact the development team.
