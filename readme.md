@@ -1,5 +1,5 @@
 # autorecord
-## Generate lab records with a single click
+## Generate beautiful lab records with a single click!
 
 # Table of Contents
   - [Generate lab records with a single click](#generate-lab-records-with-a-single-click)
@@ -9,7 +9,7 @@
   - [Contribute](#contribute)
   - [Additional Directories](#additional-directories)
 
-## One-Time Setup for Autorecord
+## One-Time Setup for autorecord
 
 **Ready to use Autorecord? Here's a quick setup:**
 
@@ -27,9 +27,9 @@ docker pull krishnachandranu/autorecord-frontend
 ```
 **Tip:** These commands might take a while depending on your internet speed.
 
-## Running Autorecord
+## Running autorecord
 
-**Ready to start recording? Here's how to launch Autorecord:**
+**Ready to start making records? Here's how to launch autorecord:**
 
 1. **Open a terminal:** Open your terminal or command prompt.
 2. **Run Backend:** In the terminal, run this command to start the backend of autorecord:
