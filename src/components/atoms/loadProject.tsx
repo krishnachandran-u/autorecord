@@ -21,61 +21,59 @@ const LoadProject = (
     const [showProjectDeleteConfirm, setShowProjectDeleteConfirm] = useState(false);
     const [projectToDelete, setProjectToDelete] = useState('');
 
-    const [projectList, setProjectList] = useState([]);
-
     const { toast } = useToast();
 
+    const [projectList, setProjectList] = useState<string[]>([]);
+
     const fetchData = async () => {
+      try {
+        const localStorageKeys = Object.keys(localStorage).filter(key => key !== 'ally-supports-cache' && key !== 'loglevel');
+        setProjectList(localStorageKeys);
+      } catch (error) {
+        console.error('Error accessing localStorage:', error);
+      }
+    };
+
+    const load = async ({ code }: { code: string }) => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/list`);
-            console.log(response.data);
-            setProjectList(response.data);
+            const localStorageData = localStorage.getItem(code);
+            if (localStorageData) {
+              const data = JSON.parse(localStorageData);
+              setRecord(data.record);
+              const imageData = data.images;
+
+            const imageFiles = imageData.map((image: { name: string, data: string, type?: string }) => {
+              const byteCharacters = atob(image.data); // Decode base64 string
+              const byteArrays = [];
+              for (let i = 0; i < byteCharacters.length; i++) {
+                byteArrays.push(byteCharacters.charCodeAt(i));
+              }
+              const byteArray = new Uint8Array(byteArrays);
+              const blob = new Blob([byteArray], { type: image.type || "image/jpeg" }); // Default to jpeg if type not provided
+            
+              return new File([blob], image.name, { type: blob.type });
+            });
+
+            setImages(imageFiles);
+              toast({
+                title: "Project loaded",
+                description: `Project ${code} loaded successfully from localStorage`,
+              });
+              return;
+            }
         } catch (error) {
             console.error(error);
         }
     };
 
-    const load = async ({ code }: { code: string }) => {
-      try {
-        const response = await axios.get(`http://localhost:5000/api/load/${code}`);
-  
-        if (response.status === 200) {
-          const data = response.data;
-          setRecord(data.json_data);
-          
-          const imageFiles = data.images.map((image: { name: string, data: string }) => {
-            const byteCharacters = atob(image.data);
-            const byteArrays = [];
-            for (let i = 0; i < byteCharacters.length; i++) {
-              byteArrays.push(byteCharacters.charCodeAt(i));
-            }
-            const byteArray = new Uint8Array(byteArrays);
-            return new File([byteArray], image.name, { type: "image/jpeg" });
-          });
-          
-          setImages(imageFiles);
-        toast({
-            title: "Project loaded",
-            description: `Project ${code} loaded successfully`,
-        })
-        } else {
-          console.error('Failed to load data');
-        }
-      } catch (error) {
-        console.error('Error loading data:', error);
-      }
-    };
-
-    const deleteProject = async ({ code }: { code: string }) => {
+    const deleteProject = ({ code }: { code: string }) => {
         try {
-            const response = await axios.delete(`http://localhost:5000/api/delete/${code}`);
-            if (response.status === 200) {
-                toast({
-                    title: "Project deleted",
-                    description: `Project ${code} deleted successfully`
-                });
-                fetchData();
-            }
+            if (localStorage.getItem(code)) localStorage.removeItem(code);
+            toast({
+                title: "Project deleted",
+                description: `Project ${code} deleted successfully`
+            });
+            fetchData();
         } catch (error) {
             console.error(error);
         }

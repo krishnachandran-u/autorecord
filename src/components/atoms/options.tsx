@@ -17,23 +17,16 @@ const Options = () => {
 
     const { toast } = useToast();
 
-    const save = async () => {
+    const save = () => {
       try {
-      const formData = new FormData();
-      formData.append("json_data", JSON.stringify(record));
-      images.forEach((image) => {
-        formData.append("images", image);
-      });
-
-      const response = await axios.post("http://localhost:5000/api/save", formData, {
-        headers: {
-        "Content-Type": "multipart/form-data"
-        }
-      });
-
-      console.log(response.data);
+      const data = {
+        record,
+        images
+      };
+      localStorage.setItem(record.code, JSON.stringify(data));
+        console.log("Project data saved to localStorage");
       } catch (error) {
-      console.error(error);
+        console.error(error);
       }
     }
 
