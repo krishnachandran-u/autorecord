@@ -91,26 +91,26 @@ def download_project(code):
                     f"\\addcontentsline{{toc}}{{part}}{{Cycle {cycleId + 1}}}\n"
                 )
                 for expId, exp in enumerate(cycle['experiments']):
+                    f.write(f"\\newpage\n")    
                     if is_valid_date(exp['date']):
                         formatted_date = datetime.datetime.strptime(exp['date'], '%Y-%m-%d').strftime('%d %b %Y')
                         f.write(
                             f"\\ihead{{\\normalfont \\rightmark \\newline {formatted_date}}}\n"
                         )
-                    f.write(
-                        f"\\newpage\n"    
-                        f"\\chapter{{{exp['name']}}}\n"
-                    )
+                    f.write(f"\\chapter{{{exp['name']}}}\n")
 
                     if(exp['hasSubProblems'] == True):
                         for probId, prob in enumerate(exp['problems']):
                             f.write(f"\\section{{{prob['name']}}}\n")
                             if prob['src']['aim'] != "":
+                                prob['src']['aim'] = str(prob['src']['aim']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
                                 f.write(
                                     f"\\subsection{{Aim}}"
-                                    f"{prob['src']['aim']}\n"
+                                    f"{(prob['src']['aim'])}\n"
                                 )
 
                             if prob['src']['algorithm'] != "":
+                                prob['src']['algorithm'] = str(prob['src']['algorithm']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
                                 f.write(f"\\subsection{{Algorithm}}")
                                 f.write(f"\\begin{{enumerate}}\n")
                                 algorithm_components = [component.strip("0123456789.- ").strip() for component in str(prob['src']['algorithm']).split('\n') if component.strip("0123456789.- ").strip()]
@@ -137,6 +137,7 @@ def download_project(code):
                                     )
 
                             if prob['src']['result'] != "":
+                                prob['src']['result'] = str(prob['src']['result']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
                                 f.write(
                                     f"\\subsection{{Result}}\n"
                                     f"{prob['src']['result']}\n"
@@ -144,17 +145,19 @@ def download_project(code):
                     else:
                         f.write(f"\\section{{{exp['name']}}}\n")
                         if exp['src']['aim'] != "":
+                            exp['src']['aim'] = str(exp['src']['aim']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
                             f.write(
                                 f"\\subsection{{Aim}}"
                                 f"{exp['src']['aim']}\n"
                             )
     
                         if exp['src']['algorithm'] != "":
+                            exp['src']['algorithm'] = str(exp['src']['algorithm']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
                             f.write(f"\\subsection{{Algorithm}}")
                             f.write(f"\\begin{{enumerate}}\n")
                             algorithm_components = [component.strip("0123456789.- ").strip() for component in str(exp['src']['algorithm']).split('\n') if component.strip("0123456789.- ").strip()]
                             for component in algorithm_components:
-                                f.write(f"\\item {component}\n")
+                                f.write(f"\\item {component.replace('_', ' ')}\n")
                             f.write(f"\\end{{enumerate}}\n")
     
                         if exp['src']['program'] != "":
@@ -176,6 +179,7 @@ def download_project(code):
                                 )
     
                         if exp['src']['result'] != "":
+                            exp['src']['result'] = str(exp['src']['result']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
                             f.write(
                                 f"\\subsection{{Result}}\n"
                                 f"{exp['src']['result']}\n"
