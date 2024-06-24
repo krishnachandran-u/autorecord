@@ -19,12 +19,9 @@
 ```
 docker volume create autorecord-appdata
 ```
-3. **Pull Docker Images:** Run the following commands to pull the backend and frontend images:
+3. **Pull Docker Images:** Run the following command to pull the backend image:
 ```
 docker pull krishnachandranu/autorecord-backend
-```
-```
-docker pull krishnachandranu/autorecord-frontend
 ```
 **Tip:** These commands might take a while depending on your internet speed.
 
@@ -32,18 +29,11 @@ docker pull krishnachandranu/autorecord-frontend
 
 **Ready to start making records? Here's how to launch autorecord:**
 
-1. **Open a terminal:** Open your terminal or command prompt.
-2. **Run Backend:** In the terminal, run this command to start the backend of autorecord:
+1. **Run Backend:** Open a terminal or command prompt, run this command to start the backend of autorecord:
 ```
 docker run -v autorecord-appdata:/.appdata -p 5000:5000 krishnachandranu/autorecord-backend
 ```
-2. **Run Frontend:** Open **another** terminal or command prompt. In the terminal, run this command to start the frontend of autorecord:
-```
-docker run -p 3000:3000 krishnachandranu/autorecord-frontend
-```
-**Important:** Make sure to run these commands in separate terminals to ensure both parts of autorecord function correctly.
-
-3. **All set!:** After the containers are running, open your web browser and go to [http://localhost:3000](http://localhost:3000).
+**All set!:** After the container is running, open your web browser and go to [autorecord](https://autorecord.vercel.app/).
 
 ## Get Your Lab Report as PDF
 
