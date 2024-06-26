@@ -1,8 +1,10 @@
 # autorecord
 ## Generate beautiful lab records with a single click!
 
+[Watch YouTube Tutorial](https://www.youtube.com/watch?v=wnqXSQqt4SI)  
+**Important:** Run the [One-Time Setup](#one-time-setup-for-autorecord) and [Running Autorecord](#running-autorecord) before using the web interface.
+
 ## Table of Contents
-  - [Generate lab records with a single click](#generate-lab-records-with-a-single-click)
   - [One-Time Setup for Autorecord](#one-time-setup-for-autorecord)
   - [Running Autorecord](#running-autorecord)
   - [Get Your Lab Report as PDF](#get-your-lab-report-as-pdf)
