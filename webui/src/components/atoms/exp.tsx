@@ -41,8 +41,8 @@ const Exp = (
       setRecord(prevRecord => {
         const updatedExps = [ ...prevRecord.cycles[cycleId].experiments];
         updatedExps.push({
-                name: `Experiment Name`,
-                date: "dd-mm-yyyy",
+                name: ``,
+                date: "",
                 hasSubProblems: false,
                 src: {
                     aim: "",
@@ -80,7 +80,7 @@ const Exp = (
         setRecord(prevRecord => {
             const updatedProbs = [...prevRecord.cycles[cycleId].experiments[id].problems];
             updatedProbs.push({
-                name: `Problem ${updatedProbs.length + 1}`,
+                name: '', //`Problem ${updatedProbs.length + 1}`,
                 src: {
                     aim: "",
                     algorithm: "",

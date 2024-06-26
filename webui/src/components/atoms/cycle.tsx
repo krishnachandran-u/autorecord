@@ -34,15 +34,15 @@ const Cycle = (
             updatedCycles.push({
                 experiments: [
                     {
-                        name: "Experiment 3",
+                        name: "Experiment Name",
                         date: "",
                         hasSubProblems: false,
                         src: {
-                            aim: "Aim",
-                            algorithm: "Algorithm",
-                            program: "Program",
-                            output: ["sample1", "sample2"],
-                            result: "Result"
+                            aim: "",
+                            algorithm: "",
+                            program: "",
+                            output: [],
+                            result: ""
                         },
                         problems: []
                     }

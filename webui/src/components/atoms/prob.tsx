@@ -29,7 +29,7 @@ const Prob = (
         setRecord(prevRecord => {
             const updatedProbs = [...prevRecord.cycles[cycleId].experiments[expId].problems];
             updatedProbs.push({
-                name: `Problem ${updatedProbs.length + 1}`,
+                name: '',//`Problem ${updatedProbs.length + 1}`,
                 src: {
                     aim: "",
                     algorithm: "",

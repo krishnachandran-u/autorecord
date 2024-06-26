@@ -36,7 +36,7 @@ const NewProject = (
                 {
                     experiments: [
                         {
-                            name: "Experiment Name",
+                            name: "",
                             date: "",
                             hasSubProblems: false,
                             src: {
