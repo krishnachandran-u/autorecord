@@ -43,7 +43,7 @@ const NewProject = (
                                 aim: "",
                                 algorithm: "",
                                 program: "",
-                                output: [""],
+                                output: [],
                                 result: ""
                             },
                             problems: []

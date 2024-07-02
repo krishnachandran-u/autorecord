@@ -126,7 +126,7 @@ def download_project(code):
                                 if(json_data['monospace']): f.write(f"\\end{{verbatim}}\n")
                                 else: f.write("\\end{{lstlisting}}")
 
-                            if prob['src']['output']:
+                            if prob['src']['output'] != []:
                                 f.write(f"\\subsection{{Output}}\n")
                                 for output in prob['src']['output']:
                                     f.write(
@@ -143,7 +143,6 @@ def download_project(code):
                                     f"{prob['src']['result']}\n"
                                 )
                     else:
-                        f.write(f"\\section{{{exp['name']}}}\n")
                         if exp['src']['aim'] != "":
                             exp['src']['aim'] = str(exp['src']['aim']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
                             f.write(
@@ -168,7 +167,7 @@ def download_project(code):
                             if(json_data['monospace']): f.write(f"\\end{{verbatim}}\n")
                             else: f.write("\\end{{lstlisting}}")
     
-                        if exp['src']['output']:
+                        if exp['src']['output'] != []:
                             f.write(f"\\subsection{{Output}}\n")
                             for output in exp['src']['output']:
                                 f.write(
