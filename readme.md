@@ -23,7 +23,7 @@ docker volume create autorecord-appdata
 ```
 3. **Pull Docker Images:** Run the following command to pull the backend image:
 ```
-docker pull krishnachandranu/autorecord-backend
+docker pull krishnachandranu/autorecord-backend:v2
 ```
 **Tip:** These commands might take a while depending on your internet speed.
 
@@ -33,7 +33,7 @@ docker pull krishnachandranu/autorecord-backend
 
 1. **Run Backend:** Open a terminal or command prompt, run this command to start the backend of autorecord:
 ```
-docker run -v autorecord-appdata:/.appdata -p 5000:5000 krishnachandranu/autorecord-backend
+docker run -v autorecord-appdata:/.appdata -p 5000:5000 krishnachandranu/autorecord-backend:v2
 ```
 **All set!:** After the container is running, open your web browser and go to [autorecord](https://autorecord.vercel.app/).
 
