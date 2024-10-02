@@ -48,6 +48,21 @@ def is_valid_date(date):
     except ValueError:
         return False
 
+def replace_latex_special_chars(text: str):
+    text = text.replace('<', '\\textless')
+    text = text.replace('>', '\\textgreater')
+    text = text.replace('_', '\\_')
+    text = text.replace('&', '\\&')
+    text = text.replace('%', '\\%')
+    text = text.replace('$', '\\$')
+    text = text.replace('#', '\\#')
+    text = text.replace('^', '\\^')
+    text = text.replace('{', '\\{')
+    text = text.replace('}', '\\}')
+    text = text.replace('~', '\\textasciitilde')
+    text = text.replace('\\', '\\textbackslash')
+    return text
+
 @app.route('/api/download/<code>', methods=['GET'])
 def download_project(code):
     try:
@@ -67,6 +82,7 @@ def download_project(code):
         json_file = f"{app.config['SAVE_DIR']}/{code}/{code}.json"
         with open(json_file, 'r') as f:
             json_data = json.load(f)
+        
         
         latex_file = f"{dir}/main.tex"
         with open(latex_file, 'r') as f:
@@ -97,20 +113,20 @@ def download_project(code):
                         f.write(
                             f"\\ihead{{\\normalfont \\rightmark \\newline {formatted_date}}}\n"
                         )
-                    f.write(f"\\chapter{{{exp['name']}}}\n")
+                    f.write(f"\\chapter{{{replace_latex_special_chars(exp['name'])}}}\n")
 
                     if(exp['hasSubProblems'] == True):
                         for probId, prob in enumerate(exp['problems']):
-                            f.write(f"\\section{{{prob['name']}}}\n")
+                            f.write(f"\\section{{{replace_latex_special_chars(prob['name'])}}}\n")
                             if prob['src']['aim'] != "":
-                                prob['src']['aim'] = str(prob['src']['aim']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
+                                prob['src']['aim'] = replace_latex_special_chars(str(prob['src']['aim']))
                                 f.write(
                                     f"\\subsection{{Aim}}"
                                     f"{(prob['src']['aim'])}\n"
                                 )
 
                             if prob['src']['algorithm'] != "":
-                                prob['src']['algorithm'] = str(prob['src']['algorithm']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
+                                prob['src']['algorithm'] = replace_latex_special_chars(str(prob['src']['algorithm']))
                                 f.write(f"\\subsection{{Algorithm}}")
                                 f.write(f"\\begin{{enumerate}}\n")
                                 algorithm_components = [component.strip("0123456789.- ").strip() for component in str(prob['src']['algorithm']).split('\n') if component.strip("0123456789.- ").strip()]
@@ -137,21 +153,21 @@ def download_project(code):
                                     )
 
                             if prob['src']['result'] != "":
-                                prob['src']['result'] = str(prob['src']['result']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
+                                prob['src']['result'] = replace_latex_special_chars(str(prob['src']['result']))
                                 f.write(
                                     f"\\subsection{{Result}}\n"
                                     f"{prob['src']['result']}\n"
                                 )
                     else:
                         if exp['src']['aim'] != "":
-                            exp['src']['aim'] = str(exp['src']['aim']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
+                            exp['src']['aim'] = replace_latex_special_chars(str(exp['src']['aim']))
                             f.write(
                                 f"\\subsection{{Aim}}"
                                 f"{exp['src']['aim']}\n"
                             )
     
                         if exp['src']['algorithm'] != "":
-                            exp['src']['algorithm'] = str(exp['src']['algorithm']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
+                            exp['src']['algorithm'] = replace_latex_special_chars(str(exp['src']['algorithm']))
                             f.write(f"\\subsection{{Algorithm}}")
                             f.write(f"\\begin{{enumerate}}\n")
                             algorithm_components = [component.strip("0123456789.- ").strip() for component in str(exp['src']['algorithm']).split('\n') if component.strip("0123456789.- ").strip()]
@@ -178,7 +194,7 @@ def download_project(code):
                                 )
     
                         if exp['src']['result'] != "":
-                            exp['src']['result'] = str(exp['src']['result']).replace('<', '\\textless').replace('>', '\\textgreater').replace('_', ' ')
+                            exp['src']['result'] = replace_latex_special_chars(str(exp['src']['result']))
                             f.write(
                                 f"\\subsection{{Result}}\n"
                                 f"{exp['src']['result']}\n"
