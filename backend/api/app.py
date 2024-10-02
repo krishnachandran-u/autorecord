@@ -61,6 +61,9 @@ def replace_latex_special_chars(text: str):
     text = text.replace('}', '\\}')
     text = text.replace('~', '\\textasciitilde')
     text = text.replace('\\', '\\textbackslash')
+    text = text.replace('≤', '<=')
+    text = text.replace('≥', '>=')
+    text = text.replace('≠', '!=')
     return text
 
 @app.route('/api/download/<code>', methods=['GET'])
