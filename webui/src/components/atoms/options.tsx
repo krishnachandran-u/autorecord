@@ -121,6 +121,7 @@ const Options = () => {
             <div className = "flex flex-row justify-between items-center gap-[32px]">
               <button
                 className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white flex-1"
+                title="Save Project"
                 onClick = {() => {
                   save();
                   toast({
@@ -133,6 +134,7 @@ const Options = () => {
               </button>
               <button 
                 className = "bg-slate-200 p-[12px] rounded-lg transition-all duration-300 w-full sm:w-auto text-blue-600 font-bold border-2 border-slate-200 hover:border-blue-600 hover:bg-white flex-1"
+                title="Download LaTeX ZIP"
                 onClick = {
                   () => {
                     download();

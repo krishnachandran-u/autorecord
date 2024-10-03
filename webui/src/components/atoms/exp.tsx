@@ -133,6 +133,7 @@ const Exp = (
                 <FaAngleDown 
                     onClick={() => setShow(!show)}
                     color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all min-w-[20px] min-h-[20px] duration-300`}
+                    title={show ? "Collapse Experiment" : "Expand Experiment"}
                 />
                 <input 
                     type = "text" 
@@ -164,6 +165,7 @@ const Exp = (
                         color = "red" 
                         className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
                         onClick = {() => setShowConfirm(true)} 
+                        title={"Delete Experiment " + (expNum() + 1)}
                     /> 
                 )}
                 <AnimatePresence>
@@ -248,6 +250,7 @@ const Exp = (
                                 color = "red" 
                                 className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
                                 onClick={() => setShowProbConfirm(true)}
+                                title="Create Subproblem"
                             />
                         )}
                     </motion.div>
@@ -280,6 +283,7 @@ const Exp = (
                     color = "red" 
                     className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
                     onClick = {() => addExp()}
+                    title="Add Experiment"
                 /> 
             )}
         </div>

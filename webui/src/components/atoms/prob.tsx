@@ -108,6 +108,7 @@ const Prob = (
                 <FaAngleDown 
                     onClick={() => setShow(!show)}
                     color = "red" className = {`hover:cursor-pointer ${show ? "rotate-180" : ""} transition-all duration-300 min-w-[20px] min-h-[20px]`}
+                    title={show ? "Collapse Problem" : "Expand Problem"}
                 />
                 <input 
                     type = "text" 
@@ -128,6 +129,7 @@ const Prob = (
                          color = "red" 
                          className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
                          onClick = {() => setShowConfirm(true)} 
+                         title={`Delete Problem ${id + 1}`}
                      /> 
                 )}
                 <AnimatePresence>
@@ -201,6 +203,7 @@ const Prob = (
                     color = "red" 
                     className = "hover:cursor-pointer min-w-[20px] min-h-[20px]" 
                     onClick = {() => addProb()}
+                    title="Add Problem"
                 /> 
             )}
         </div> 
